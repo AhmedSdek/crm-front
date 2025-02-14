@@ -11,7 +11,12 @@ import { io } from 'socket.io-client';
 //     reconnectionAttempts: 5,  // عدد محاولات إعادة الاتصال
 //     reconnectionDelay: 1000,  // مدة التأخير بين المحاولات
 // });
-const socket = io('http://localhost:5000', {
+// const socket = io('http://localhost:5000', {
+//     transports: ['websocket', 'polling'],
+//     reconnection: true,
+//     withCredentials: true
+// });
+const socket = io('https://crm-back-production-d0b7.up.railway.app', {
     transports: ['websocket', 'polling'],
     reconnection: true,
     withCredentials: true
