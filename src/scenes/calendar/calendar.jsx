@@ -76,16 +76,31 @@ const Calendar = () => {
   };
 
 
-  const handleEventClick = (selected) => {
-    if (
-      window.confirm(
-        `Are you sure you want to delete the event '${selected.event.title}'`
-      )
-    ) {
+  // const handleEventClick = (selected) => {
+  //   if (
+  //     window.confirm(
+  //       `Are you sure you want to delete the event '${selected.event.title}'`
+  //     )
+  //   ) {
+  //     selected.event.remove();
+  //   }
+  // };
+  const handleEventClick = async (selected) => {
+    if (window.confirm(`Are you sure you want to delete the event '${selected.event.title}'?`)) {
+      // احذف الحدث من الـ Database
+      await fetch(`${BASE_URL}/api/events/${selected.event.id}`, {
+        method: "DELETE",
+      });
+
+  // احذف الحدث من التقويم
       selected.event.remove();
+
+      // تحديث حالة الأحداث بعد الحذف
+      setCurrentEvents((prevEvents) =>
+        prevEvents.filter((event) => event._id !== selected.event.id)
+      );
     }
   };
-
   return (
     <Box m="20px">
       <Header title="Calendar" subtitle="Full Calendar Interactive Page" />
