@@ -12,7 +12,12 @@ const PrivateRoute = ({ requiredRole }) => {
         const user = jwtDecode(token);
         console.log(user.role)
         console.log(requiredRole)
-        if (user.role !== requiredRole) return <Navigate to="/" />;
+        if (user.role === "admin") {
+            if (user.role !== requiredRole) return <Navigate to="/admin-dashboard" />;
+        }
+        if (user.role === "sales") {
+            if (user.role !== requiredRole) return <Navigate to="/allleads" />;
+        }
         return <Outlet />;
     } catch (error) {
         return <Navigate to="/login" />;
