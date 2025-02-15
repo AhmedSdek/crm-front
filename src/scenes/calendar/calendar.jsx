@@ -104,7 +104,7 @@ const Calendar = () => {
               console.log(event)
               return (
                 <ListItem
-                  key={event.id}
+                  key={event._id}
                   sx={{
                     backgroundColor: colors.greenAccent[500],
                     margin: "10px 0",
@@ -153,18 +153,7 @@ const Calendar = () => {
             select={handleDateClick}
             eventClick={handleEventClick}
             eventsSet={(events) => setCurrentEvents(events)}
-          // initialEvents={[
-          //   {
-          //     id: "12315",
-          //     title: "All-day event",
-          //     date: "2022-09-14",
-          //   },
-          //   {
-          //     id: "5123",
-          //     title: "Timed event",
-          //     date: "2022-09-28",
-          //   },
-          // ]}
+            initialEvents={currentEvents}
           />
         </Box>
       </Box>
