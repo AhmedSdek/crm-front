@@ -95,6 +95,7 @@ const Calendar = () => {
       });
 
       const savedEvent = await response.json();
+      console.log(savedEvent)
       // تحديث القائمة فورًا بعد نجاح الإضافة
       setCurrentEvents((prevEvents) => [...prevEvents, savedEvent]);
       // إضافة الحدث إلى التقويم مع حفظ _id في extendedProps
