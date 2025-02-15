@@ -75,6 +75,7 @@ const Calendar = () => {
   //   }
   // };
   const handleDateClick = async (selected) => {
+    console.log(selected)
     const title = prompt("Please enter a new title for your event");
     const calendarApi = selected.view.calendar;
     calendarApi.unselect();
@@ -108,16 +109,6 @@ const Calendar = () => {
     }
   };
 
-
-  // const handleEventClick = (selected) => {
-  //   if (
-  //     window.confirm(
-  //       `Are you sure you want to delete the event '${selected.event.title}'`
-  //     )
-  //   ) {
-  //     selected.event.remove();
-  //   }
-  // };
   const handleEventClick = async (selected) => {
     console.log(selected)
     if (window.confirm(`Are you sure you want to delete the event '${selected.event.title}'?`)) {
