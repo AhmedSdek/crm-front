@@ -5,13 +5,10 @@ import { Navigate, Outlet } from 'react-router-dom';
 
 const PrivateRoute = ({ requiredRole }) => {
     const token = localStorage.getItem('token');
-    // console.log(token)
     if (!token) return <Navigate to="/login" />;
 
     try {
         const user = jwtDecode(token);
-        console.log(user.role)
-        console.log(requiredRole)
         if (user.role === "admin") {
             if (user.role !== requiredRole) return <Navigate to="/admin-dashboard" />;
         }
