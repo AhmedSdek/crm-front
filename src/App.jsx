@@ -113,10 +113,9 @@
 
 // export default App
 import './App.css'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useNavigate } from 'react-router-dom'
 import Clients from './pages/Clients.jsx'
 import Home from './pages/Home.jsx'
-import { io } from 'socket.io-client';
 import { useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -125,11 +124,9 @@ import LoginPage from './pages/auth/Login.jsx'
 import AdminDashboard from './pages/admin/AdminDashboard.jsx'
 import PrivateRoute from './components/PrivateRoute.jsx'
 import CreateSalesUser from './pages/admin/CerateSalesAcount.jsx'
-import NavBar from './components/nav/Nav.jsx'
 import AllLeads from './pages/sales/AllLeads.jsx'
 import ClientDetails from './pages/sales/ClientDetails.jsx'
 import AddClient from './pages/sales/AddClient.jsx'
-import AllClients from './pages/admin/AllClients.jsx'
 import AdminClientDetails from './pages/admin/AdminClientDetails.jsx'
 import AllSales from './pages/admin/AllSales.jsx'
 import SaleDetails from './pages/admin/SaleDetails.jsx'
@@ -156,7 +153,7 @@ function App() {
   const [theme, colorMode] = useMode();
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true); // إضافة حالة التحميل
-
+  const nav = useNavigate()
   const token = localStorage.getItem('token');
   useEffect(() => {
     if (token) {
