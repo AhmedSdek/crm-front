@@ -203,13 +203,13 @@ function App() {
               <ToastContainer />
               <Routes>
                 <Route path="/admin-dashboard" element={<PrivateRoute requiredRole="admin" />}>
+                  <Route index element={<Dashboard />} />
                   <Route path="clients" element={<Clients />} />
                   <Route path="all-sales" element={<AllSales />} />
                   <Route path="team/:id" element={<SaleDetails />} />
                   <Route path="create-sales" element={<CreateSalesUser />} />
                   {/* <Route path="all-clients" element={<AllClients />} /> */}
                   <Route path="all-clients/:id" element={<AdminClientDetails />} />
-                  <Route index element={<Dashboard />} />
                   <Route path="team" element={<Team />} />
                   <Route path="all-clients" element={<Contacts />} />
                   <Route path="invoices" element={<Invoices />} />
