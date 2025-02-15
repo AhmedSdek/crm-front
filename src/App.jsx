@@ -159,6 +159,7 @@ function App() {
     if (token) {
       try {
         const decodedUser = jwtDecode(token);
+        console.log(decodedUser)
         setUser(decodedUser);
         if (decodedUser.role === "sales") {
           nav('/allleads')
