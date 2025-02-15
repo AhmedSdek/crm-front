@@ -153,7 +153,8 @@ const Calendar = () => {
             select={handleDateClick}
             eventClick={handleEventClick}
             eventsSet={(events) => setCurrentEvents(events)}
-            initialEvents={currentEvents}
+            events={currentEvents}
+            // initialEvents={currentEvents}
           />
         </Box>
       </Box>
