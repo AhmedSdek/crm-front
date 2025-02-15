@@ -75,7 +75,6 @@ const Calendar = () => {
   //   }
   // };
   const handleDateClick = async (selected) => {
-    console.log(selected)
     const title = prompt("Please enter a new title for your event");
     const calendarApi = selected.view.calendar;
     calendarApi.unselect();
@@ -96,7 +95,8 @@ const Calendar = () => {
       });
 
       const savedEvent = await response.json();
-
+      // تحديث القائمة فورًا بعد نجاح الإضافة
+      setCurrentEvents((prevEvents) => [...prevEvents, savedEvent]);
       // إضافة الحدث إلى التقويم مع حفظ _id في extendedProps
       calendarApi.addEvent({
         id: savedEvent._id, // مهم جدًا
@@ -141,7 +141,6 @@ const Calendar = () => {
           <Typography variant="h5">Events</Typography>
           <List>
             {currentEvents.map((event) => {
-              console.log(event)
               return (
                 <ListItem
                   key={event._id}
