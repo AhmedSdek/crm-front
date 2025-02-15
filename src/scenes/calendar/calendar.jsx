@@ -103,7 +103,7 @@ const Calendar = () => {
       calendarApi.addEvent({
         title: savedEvent.title,
         start: savedEvent.start,
-        id: "12", // مهم جدًا
+        id: savedEvent._id, // مهم جدًا
         end: savedEvent.end,
         allDay: savedEvent.allDay,
         extendedProps: { _id: savedEvent._id }, // تخزين الـ _id الأصلي
