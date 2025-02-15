@@ -66,7 +66,7 @@ const LoginPage = () => {
                         style={{ marginRight: '10px' }}
                     />
 
-                    <Button type="submit">تسجيل الدخول</Button>
+                    <Button variant='contained' type="submit">Login</Button>
                 </Stack>
             </Container>
         );

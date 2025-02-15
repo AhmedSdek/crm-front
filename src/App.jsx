@@ -159,7 +159,6 @@ function App() {
     if (token) {
       try {
         const decodedUser = jwtDecode(token);
-        console.log(decodedUser)
         setUser(decodedUser);
         if (decodedUser.role === 'admin') {
           nav('/admin-dashboard'); // توجيه الأدمن
