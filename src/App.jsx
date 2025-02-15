@@ -164,7 +164,7 @@ function App() {
         if (decodedUser.role === 'admin') {
           nav('/admin-dashboard'); // توجيه الأدمن
         } else if (decodedUser.role === 'sales') {
-          nav('/'); // توجيه السيلز
+          nav('/allleads'); // توجيه السيلز
         }
       } catch (error) {
         console.error("Invalid token:", error);
