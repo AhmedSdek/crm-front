@@ -122,7 +122,7 @@ const Calendar = () => {
 
       // تحديث حالة الأحداث بعد الحذف
       setCurrentEvents((prevEvents) =>
-        prevEvents.filter((event) => event._id !== selected.event.id)
+        prevEvents.filter((event) => event._id !== selected.event._def.extendedProps._id)
       );
     }
   };
