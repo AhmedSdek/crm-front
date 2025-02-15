@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import { formatDate } from '@fullcalendar/core';
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -15,27 +15,66 @@ import {
 } from "@mui/material";
 import Header from "../../components/Header";
 import { tokens } from "../../theme";
+import { BASE_URL } from "../../components/constants/baseurl";
 
 const Calendar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [currentEvents, setCurrentEvents] = useState([]);
+  useEffect(() => {
+    const fetchEvents = async () => {
+      const response = await fetch(`${BASE_URL}/api/events`);
+      const events = await response.json();
+      setCurrentEvents(events);
+    };
+    fetchEvents();
+  }, []);
+  // const handleDateClick = (selected) => {
+  //   const title = prompt("Please enter a new title for your event");
+  //   const calendarApi = selected.view.calendar;
+  //   calendarApi.unselect();
 
-  const handleDateClick = (selected) => {
+  //   if (title) {
+  //     calendarApi.addEvent({
+  //       id: `${selected.dateStr}-${title}`,
+  //       title,
+  //       start: selected.startStr,
+  //       end: selected.endStr,
+  //       allDay: selected.allDay,
+  //     });
+  //   }
+  // };
+
+  const handleDateClick = async (selected) => {
     const title = prompt("Please enter a new title for your event");
     const calendarApi = selected.view.calendar;
     calendarApi.unselect();
 
     if (title) {
-      calendarApi.addEvent({
-        id: `${selected.dateStr}-${title}`,
+      const newEvent = {
         title,
         start: selected.startStr,
         end: selected.endStr,
         allDay: selected.allDay,
+      };
+
+      // إرسال الحدث إلى السيرفر لحفظه في قاعدة البيانات
+      const response = await fetch(`${BASE_URL}/api/events`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newEvent),
+      });
+
+      const savedEvent = await response.json();
+
+      // إضافة الحدث إلى التقويم
+      calendarApi.addEvent({
+        id: savedEvent._id,
+        ...newEvent,
       });
     }
   };
+
 
   const handleEventClick = (selected) => {
     if (
