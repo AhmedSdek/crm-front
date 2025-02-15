@@ -162,9 +162,11 @@ function App() {
         console.log(decodedUser)
         setUser(decodedUser);
         if (decodedUser.role === "sales") {
+          console.log(`sales ${decodedUser}`)
           nav('/allleads')
         }
         if (decodedUser.role === "admin") {
+          console.log(`admin ${decodedUser}`)
           nav('/admin-dashboard')
         }
       } catch (error) {
