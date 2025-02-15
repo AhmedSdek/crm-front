@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BASE_URL } from '../../components/constants/baseurl';
-import { Button, Container, Stack, TextField } from '@mui/material';
+import { Button, Container, Stack, TextField, Typography } from '@mui/material';
 
 const SignUpPage = () => {
     const [formData, setFormData] = useState({
