@@ -150,7 +150,7 @@ import FAQ from './scenes/faq/index.jsx';
 import Calendar from './scenes/calendar/calendar.jsx';
 import { jwtDecode } from 'jwt-decode';
 
-const socket = io('http://localhost:5000'); // عنوان السيرفر
+const socket = io('https://crm-back-production-d0b7.up.railway.app'); // عنوان السيرفر
 function App() {
   const [theme, colorMode] = useMode();
   const [user, setUser] = useState(null);
