@@ -66,7 +66,7 @@ const SignUpPage = () => {
                     onChange={handleChange}
                     style={{ marginRight: '10px' }}
                 />
-                <Button type="submit">تسجيل</Button>
+                <Button variant='contained' type="submit">Sign Up</Button>
             </Stack>
         </Container>
     );
