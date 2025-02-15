@@ -161,13 +161,10 @@ function App() {
         const decodedUser = jwtDecode(token);
         console.log(decodedUser)
         setUser(decodedUser);
-        if (decodedUser.role === "sales") {
-          console.log(`sales ${decodedUser}`)
-          nav('/allleads')
-        }
-        if (decodedUser.role === "admin") {
-          console.log(`admin ${decodedUser}`)
-          nav('/admin-dashboard')
+        if (decodedUser.role === 'admin') {
+          window.location.pathname = '/admin-dashboard'; // توجيه الأدمن
+        } else if (decodedUser.role === 'sales') {
+          nav('/'); // توجيه السيلز
         }
       } catch (error) {
         console.error("Invalid token:", error);
