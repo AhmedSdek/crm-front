@@ -45,6 +45,35 @@ const Calendar = () => {
   //   }
   // };
 
+  // const handleDateClick = async (selected) => {
+  //   const title = prompt("Please enter a new title for your event");
+  //   const calendarApi = selected.view.calendar;
+  //   calendarApi.unselect();
+
+  //   if (title) {
+  //     const newEvent = {
+  //       title,
+  //       start: selected.startStr,
+  //       end: selected.endStr,
+  //       allDay: selected.allDay,
+  //     };
+
+  //     // إرسال الحدث إلى السيرفر لحفظه في قاعدة البيانات
+  //     const response = await fetch(`${BASE_URL}/api/events`, {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify(newEvent),
+  //     });
+
+  //     const savedEvent = await response.json();
+
+  //     // إضافة الحدث إلى التقويم
+  //     calendarApi.addEvent({
+  //       id: savedEvent._id,
+  //       ...newEvent,
+  //     });
+  //   }
+  // };
   const handleDateClick = async (selected) => {
     const title = prompt("Please enter a new title for your event");
     const calendarApi = selected.view.calendar;
@@ -67,10 +96,14 @@ const Calendar = () => {
 
       const savedEvent = await response.json();
 
-      // إضافة الحدث إلى التقويم
+      // إضافة الحدث إلى التقويم مع حفظ _id في extendedProps
       calendarApi.addEvent({
-        id: savedEvent._id,
-        ...newEvent,
+        id: savedEvent._id, // مهم جدًا
+        title: savedEvent.title,
+        start: savedEvent.start,
+        end: savedEvent.end,
+        allDay: savedEvent.allDay,
+        extendedProps: { _id: savedEvent._id }, // تخزين الـ _id الأصلي
       });
     }
   };
@@ -89,7 +122,7 @@ const Calendar = () => {
     console.log(selected)
     if (window.confirm(`Are you sure you want to delete the event '${selected.event.title}'?`)) {
       // احذف الحدث من الـ Database
-      await fetch(`${BASE_URL}/api/events/${selected.event.id}`, {
+      await fetch(`${BASE_URL}/api/events/${selected.event._id}`, {
         method: "DELETE",
       });
 
