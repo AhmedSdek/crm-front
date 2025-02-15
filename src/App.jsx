@@ -162,7 +162,7 @@ function App() {
         console.log(decodedUser)
         setUser(decodedUser);
         if (decodedUser.role === 'admin') {
-          window.location.pathname = '/admin-dashboard'; // توجيه الأدمن
+          nav('/admin-dashboard'); // توجيه الأدمن
         } else if (decodedUser.role === 'sales') {
           nav('/'); // توجيه السيلز
         }
