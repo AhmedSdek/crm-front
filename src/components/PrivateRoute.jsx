@@ -10,6 +10,8 @@ const PrivateRoute = ({ requiredRole }) => {
 
     try {
         const user = jwtDecode(token);
+        console.log(user.role)
+        console.log(requiredRole)
         if (user.role !== requiredRole) return <Navigate to="/" />;
         return <Outlet />;
     } catch (error) {
