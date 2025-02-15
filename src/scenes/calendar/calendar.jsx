@@ -167,7 +167,7 @@ const Calendar = () => {
             dayMaxEvents={true}
             select={handleDateClick}
             eventClick={handleEventClick}
-            eventsSet={(events) => setCurrentEvents(events)}
+            // eventsSet={(events) => setCurrentEvents(events)}
             events={currentEvents}
             // initialEvents={currentEvents}
           />
