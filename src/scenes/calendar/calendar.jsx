@@ -101,9 +101,9 @@ const Calendar = () => {
       setCurrentEvents((prevEvents) => [...prevEvents, savedEvent]);
       // إضافة الحدث إلى التقويم مع حفظ _id في extendedProps
       calendarApi.addEvent({
+        id: savedEvent._id, // مهم جدًا
         title: savedEvent.title,
         start: savedEvent.start,
-        id: new Date().getTime(), // مهم جدًا
         end: savedEvent.end,
         allDay: savedEvent.allDay,
         extendedProps: { _id: savedEvent._id }, // تخزين الـ _id الأصلي
