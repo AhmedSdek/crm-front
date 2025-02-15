@@ -39,7 +39,9 @@ const SignUpPage = () => {
     return (
         <Container>
             <Stack spacing={2} component='form' onSubmit={handleSubmit}>
-                <h2>تسجيل مستخدم جديد</h2>
+                <Typography>
+                    Sign Up
+                </Typography>
                 <TextField
                     label="Name"
                     value={formData.name}

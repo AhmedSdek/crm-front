@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../../components/constants/baseurl';
 import { useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
-import { Button, Container, Stack, TextField } from '@mui/material';
+import { Button, Container, Stack, TextField, Typography } from '@mui/material';
 
 const LoginPage = () => {
     const [email, setEmail] = useState('');
@@ -46,7 +46,9 @@ const LoginPage = () => {
         return (
             <Container>
                 <Stack spacing={2} component='form' onSubmit={handleLogin}>
-                    <h2>تسجيل الدخول</h2>
+                    <Typography>
+                        Login
+                    </Typography>
                     <TextField
                         label="Email"
                         value={email}
