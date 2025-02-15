@@ -110,10 +110,10 @@ const Calendar = () => {
   };
 
   const handleEventClick = async (selected) => {
-    console.log(selected.event._def)
+    console.log(selected.event._def.extendedProps._id)
     if (window.confirm(`Are you sure you want to delete the event '${selected.event.title}'?`)) {
       // احذف الحدث من الـ Database
-      await fetch(`${BASE_URL}/api/events/${selected.event.id}`, {
+      await fetch(`${BASE_URL}/api/events/${selected.event._def.extendedProps._id}`, {
         method: "DELETE",
       });
 
