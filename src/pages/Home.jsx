@@ -24,7 +24,7 @@ function Home() {
                 setUser(null);
             }
         }
-    }, [token]);
+    }, []);
 
     return (
         <div>Home</div>
