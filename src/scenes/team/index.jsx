@@ -54,7 +54,6 @@ const Team = () => {
       renderCell: ({ row: { role } }) => {
         return (
           <Box
-            width="60%"
             m="auto"
             p="5px"
             display="flex"
