@@ -222,6 +222,7 @@ import { useParams } from 'react-router-dom';
 import { Button, Container, Divider, FormControl, IconButton, InputLabel, MenuItem, Select, Stack, TextField, Typography } from '@mui/material';
 import { LocalPhone, WhatsApp } from '@mui/icons-material';
 import { useGetAllUsersQuery, useGetAllClientsQuery, useUpdateClientMutation } from '../../redux/apiSlice';
+import Swal from 'sweetalert2';
 
 function AdminClientDetails() {
     const { id } = useParams();
@@ -249,9 +250,21 @@ function AdminClientDetails() {
     const handleUpdate = async () => {
         try {
             await updateClient({ id, updates: editedData }).unwrap(); // تحديث العميل
-            alert('Client updated successfully');
+            // alert('Client updated successfully');
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Client updated successfully",
+                showConfirmButton: false,
+                timer: 900
+            });
         } catch (error) {
             console.error('Failed to update client:', error);
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: " Failed to update client",
+            });
         }
     };
 

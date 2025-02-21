@@ -112,7 +112,7 @@ const Team = () => {
                 cursor: "pointer",
               }}
             >
-              Edit
+              View
             </Button>
             {/* <Button
               onClick={() => handleDelete(row._id)}
