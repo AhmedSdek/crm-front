@@ -76,7 +76,10 @@ const Invoices = () => {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={mockDataInvoices} columns={columns} />
+        <DataGrid checkboxSelection rows={mockDataInvoices} columns={columns.map((col) => ({
+          ...col,
+          minWidth: 150, // إعطاء حد أدنى لكل عمود
+        }))} />
       </Box>
     </Box>
   );
