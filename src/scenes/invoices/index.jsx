@@ -43,16 +43,55 @@ const Invoices = () => {
   ];
 
   return (
+    // <Box m="20px">
+    //   <Header title="INVOICES" subtitle="List of Invoice Balances" />
+    //   <Box
+    //     m="40px 0 0 0"
+    //     height="75vh"
+    //     sx={{
+    //       overflowX: "auto", // السماح بالتمرير الأفقي
+    //       "& .MuiDataGrid-root": {
+    //         border: "none",
+    //         minWidth: "700px", // ضمان عدم تصغير الجدول كثيرًا
+    //       },
+    //       "& .MuiDataGrid-cell": {
+    //         borderBottom: "none",
+    //       },
+    //       "& .name-column--cell": {
+    //         color: colors.greenAccent[300],
+    //       },
+    //       "& .MuiDataGrid-columnHeaders": {
+    //         backgroundColor: colors.blueAccent[700],
+    //         borderBottom: "none",
+    //       },
+    //       "& .MuiDataGrid-virtualScroller": {
+    //         backgroundColor: colors.primary[400],
+    //       },
+    //       "& .MuiDataGrid-footerContainer": {
+    //         borderTop: "none",
+    //         backgroundColor: colors.blueAccent[700],
+    //       },
+    //       "& .MuiCheckbox-root": {
+    //         color: `${colors.greenAccent[200]} !important`,
+    //       },
+    //     }}
+    //   >
+    //     <DataGrid checkboxSelection rows={mockDataInvoices} columns={columns.map((col) => ({
+    //       ...col,
+    //       minWidth: 150, // إعطاء حد أدنى لكل عمود
+    //     }))} />
+    //   </Box>
+    // </Box>
     <Box m="20px">
-      <Header title="INVOICES" subtitle="List of Invoice Balances" />
+      <Header title="TEAM" subtitle="Managing the Team Members" />
       <Box
         m="40px 0 0 0"
         height="75vh"
         sx={{
-          overflowX: "auto", // السماح بالتمرير الأفقي
+          overflowX: "auto", // إضافة سكرول عند الحاجة
           "& .MuiDataGrid-root": {
             border: "none",
-            minWidth: "700px", // ضمان عدم تصغير الجدول كثيرًا
+            minWidth: "900px", // التأكد من عدم تصغير الجدول أكثر من اللازم
           },
           "& .MuiDataGrid-cell": {
             borderBottom: "none",
@@ -74,9 +113,17 @@ const Invoices = () => {
           "& .MuiCheckbox-root": {
             color: `${colors.greenAccent[200]} !important`,
           },
+          "& .MuiDataGrid-toolbarContainer .MuiButton-text": {
+            color: `${colors.grey[100]} !important`,
+          },
         }}
       >
-        <DataGrid checkboxSelection rows={mockDataInvoices} columns={columns.map((col) => ({
+        <DataGrid
+          slots={{
+            toolbar: GridToolbar,
+          }}
+          components={{ Toolbar: GridToolbar }}
+          checkboxSelection rows={mockDataInvoices} getRowId={(row) => row._id} columns={columns.map((col) => ({
           ...col,
           minWidth: 150, // إعطاء حد أدنى لكل عمود
         }))} />
