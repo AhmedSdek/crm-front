@@ -29,37 +29,49 @@ const Contacts = () => {
       headerName: "First Name",
       flex: 1,
       cellClassName: "name-column--cell",
+      minWidth: 200
     },
     {
       field: "lastName",
       headerName: "Last Name",
       flex: 0.7,
       cellClassName: "name-column--cell",
+      minWidth: 200
+
     },
     {
       field: "phone",
       headerName: "Phone Number",
       flex: 1,
+      minWidth: 200
+
     },
     {
       field: "whatsapp",
       headerName: "whatsapp Number",
       flex: 1,
+      minWidth: 200
+
     },
     {
       field: "email",
       headerName: "Email",
       flex: 1,
+      minWidth: 200
+
     },
     {
       field: "status",
       headerName: "Status",
       flex: 0.7,
+      minWidth: 200
+
     },
     {
       field: "assignedTo",
       headerName: "assignedTo",
       flex: 1,
+      minWidth: 200,
       renderCell: ({ row }) => {
         return (
           <Box display="flex" justifyContent="center" alignItems="center" width="100%">
