@@ -7,7 +7,7 @@ import Header from '../../components/Header';
 const CreateSalesUser = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
-    const [phone, setPone] = useState('');
+    const [phone, setPhone] = useState('');
     const [message, setMessage] = useState('');
 
     const handleCreateSales = async (e) => {
@@ -60,7 +60,7 @@ const CreateSalesUser = () => {
                     required
                     type='text'
                     name='Phone'
-                    onChange={(e) => setPone(e.target.value)}
+                    onChange={(e) => setPhone(e.target.value)}
                     style={{ marginRight: '10px' }}
                 />
                 <Button variant='contained' type="submit">Create Sales</Button>
