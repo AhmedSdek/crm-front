@@ -33,7 +33,7 @@ const Contacts = () => {
     {
       field: "lastName",
       headerName: "Last Name",
-      flex: 1,
+      flex: 0.7,
       cellClassName: "name-column--cell",
     },
     {
@@ -59,7 +59,7 @@ const Contacts = () => {
     {
       field: "assignedTo",
       headerName: "assignedTo",
-      flex: 0.7,
+      flex: 1,
       renderCell: ({ row }) => {
         return (
           <Box display="flex" justifyContent="center" alignItems="center" width="100%">
