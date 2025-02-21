@@ -143,7 +143,7 @@ const Topbar = ({ isCollapsed, setIsCollapsed, left, setLeft }) => {
     );
     return (
         <Box sx={{ justifyContent: 'end' }} display="flex" justifyContent="space-between" alignItems='center' p={2}>
-            <IconButton sx={{ display: { sm: 'block', md: 'none' }, lineHeight: '0' }} onClick={() => {
+            <IconButton sx={{ display: { sm: 'block', md: 'none' }, lineHeight: '0', marginRight: '10px' }} onClick={() => {
                 setIsCollapsed(!isCollapsed);
             }
             }>
@@ -160,7 +160,7 @@ const Topbar = ({ isCollapsed, setIsCollapsed, left, setLeft }) => {
                     <SearchIcon />
                 </IconButton>
             </Box> */}
-            <Adb sx={{ display: 'flex', mr: 1 }} />
+            {/* <Adb sx={{ display: 'flex', mr: 1 }} /> */}
             <Typography
                 variant="h5"
                 noWrap
