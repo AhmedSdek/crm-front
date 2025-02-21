@@ -49,8 +49,11 @@ const Invoices = () => {
         m="40px 0 0 0"
         height="75vh"
         sx={{
+          overflowX: "auto", // إضافة سكرول عند الحاجة
+
           "& .MuiDataGrid-root": {
             border: "none",
+            minWidth: "700px",
           },
           "& .MuiDataGrid-cell": {
             borderBottom: "none",
