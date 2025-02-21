@@ -6,7 +6,6 @@ import { mockBarData as data } from "../data/mockData";
 const BarChart = ({ isDashboard = false }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-
   return (
     <div style={{ width: "100%", height: "400px" }}> {/* الحاوية */}
       <ResponsiveBar
@@ -41,7 +40,7 @@ const BarChart = ({ isDashboard = false }) => {
         }}
         keys={["hot dog", "burger", "sandwich", "kebab", "fries", "donut"]}
         indexBy="country"
-        margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
+        margin={{ top: 50, right: 100, bottom: 50, left: 40 }}
         padding={0.3}
         valueScale={{ type: "linear" }}
         indexScale={{ type: "band", round: true }}
