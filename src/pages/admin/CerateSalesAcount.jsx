@@ -7,6 +7,7 @@ import Header from '../../components/Header';
 const CreateSalesUser = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [phone, setPone] = useState('');
     const [message, setMessage] = useState('');
 
     const handleCreateSales = async (e) => {
@@ -16,7 +17,7 @@ const CreateSalesUser = () => {
             const response = await fetch(`${BASE_URL}/api/sales/create-sales`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, email }),
+                body: JSON.stringify({ name, email, phone }),
             });
 
             const data = await response.json();
@@ -51,6 +52,15 @@ const CreateSalesUser = () => {
                     type='email'
                     name='email'
                     onChange={(e) => setEmail(e.target.value)}
+                    style={{ marginRight: '10px' }}
+                />
+                <TextField
+                    label="Phone"
+                    value={phone}
+                    required
+                    type='text'
+                    name='Phone'
+                    onChange={(e) => setPone(e.target.value)}
                     style={{ marginRight: '10px' }}
                 />
                 <Button variant='contained' type="submit">Create Sales</Button>
