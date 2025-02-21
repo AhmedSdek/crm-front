@@ -115,8 +115,10 @@ const Contacts = () => {
         m="40px 0 0 0"
         height="75vh"
         sx={{
+          overflowX: "auto", // إضافة سكرول عند الحاجة
           "& .MuiDataGrid-root": {
             border: "none",
+            minWidth: "900px", // التأكد من عدم تصغير الجدول أكثر من اللازم
           },
           "& .MuiDataGrid-cell": {
             borderBottom: "none",
