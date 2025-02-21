@@ -151,7 +151,7 @@ const Contacts = () => {
         }}
       >
         <DataGrid
-          sx={{ overflow: 'auto' }}
+          sx={{ overflow: 'auto', maxWidth: '100%' }}
           rows={clients && clients}
           slots={{
             toolbar: GridToolbar,
