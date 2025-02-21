@@ -303,9 +303,9 @@ const Dashboard = () => {
           <Stack>
             <Box
               backgroundColor={colors.primary[400]}
-              p="30px"
+              p="30px 0"
             >
-              <Typography variant="h5" fontWeight="600">
+              <Typography variant="h5" fontWeight="600" p="5px 30px">
                 Campaign
               </Typography>
               <Box
@@ -331,7 +331,7 @@ const Dashboard = () => {
               <Typography
                 variant="h5"
                 fontWeight="600"
-                sx={{ padding: "30px 30px 0 30px" }}
+                sx={{ padding: "5px 30px" }}
               >
                 Sales Quantity
               </Typography>
