@@ -111,7 +111,7 @@ const Contacts = () => {
   ];
 
   return (
-    <Box sx={{ overflowX: "auto" }} m="20px">
+    <Box m="20px">
       <Header
         title="Leads"
         subtitle="List of Leads"
@@ -151,6 +151,7 @@ const Contacts = () => {
         }}
       >
         <DataGrid
+          sx={{ overflow: 'auto' }}
           rows={clients && clients}
           slots={{
             toolbar: GridToolbar,
