@@ -53,7 +53,7 @@ const CreateSalesUser = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     style={{ marginRight: '10px' }}
                 />
-                <Button variant='contained' type="submit">إنشاء الحساب</Button>
+                <Button variant='contained' type="submit">Create Sales</Button>
             </Stack>
             {message && <p>{message}</p>}
         </Container>
