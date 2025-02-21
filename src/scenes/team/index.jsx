@@ -203,7 +203,10 @@ const Team = () => {
             toolbar: GridToolbar,
           }}
           components={{ Toolbar: GridToolbar }}
-          checkboxSelection rows={sales} getRowId={(row) => row._id} columns={columns} />
+          checkboxSelection rows={sales} getRowId={(row) => row._id} columns={columns.map((col) => ({
+            ...col,
+            minWidth: 150, // إعطاء حد أدنى لكل عمود
+          }))} />
       </Box>
     </Box>
   );
