@@ -12,13 +12,17 @@ const Contacts = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const nav = useNavigate()
-  const handleDeleteClient = (id) => {
-    // تنفيذ استدعاء DELETE باستخدام API Slice
-    fetch(`${BASE_URL}/api/clients/${id}`, { method: 'DELETE' })
-      .then(() => console.log(`Client with ID ${id} deleted`))
-      .catch((err) => console.error(err));
+  const handleDeleteClient = async (id) => {
+    try {
+      await fetch(`${BASE_URL}/api/clients/${id}`, { method: "DELETE" });
+      console.log(`Client with ID ${id} deleted`);
+      // 🔄 تحديث البيانات بعد الحذف
+      refetch();
+    } catch (err) {
+      console.error(err);
+    }
   };
-  const { data: clients, error: clientsError, isLoading: clientsLoading } =
+  const { data: clients, error: clientsError, isLoading: clientsLoading, refetch } =
     useGetAllClientsQuery(undefined, {
       refetchOnMountOrArgChange: true, // تحديث البيانات عند تحميل المكون
       refetchOnFocus: true,            // تحديث البيانات عند التركيز على الصفحة
@@ -37,35 +41,30 @@ const Contacts = () => {
       flex: 0.7,
       cellClassName: "name-column--cell",
       minWidth: 200
-
     },
     {
       field: "phone",
       headerName: "Phone Number",
       flex: 1,
       minWidth: 200
-
     },
     {
       field: "whatsapp",
       headerName: "whatsapp Number",
       flex: 1,
       minWidth: 200
-
     },
     {
       field: "email",
       headerName: "Email",
       flex: 1,
       minWidth: 200
-
     },
     {
       field: "status",
       headerName: "Status",
       flex: 0.7,
       minWidth: 200
-
     },
     {
       field: "assignedTo",
@@ -82,16 +81,21 @@ const Contacts = () => {
     }, {
       headerName: "Action",
       flex: 1,
+      minWidth: 200,  // 🔹 تحديد حد أدنى مناسب
       renderCell: ({ row }) => {
         return (
-          <Box sx={{ gap: 2 }} display="flex" justifyContent="space-between"
-            m="auto"
-            p="5px">
+          <Box
+            sx={{
+              gap: 1,
+              display: "flex",
+              maxWidth: "100%",  // 🔹 يمنع الخروج عن حدود الخلية
+              justifyContent: "center",  // 🔹 يضمن أن الأزرار لا تخرج عن الحدود
+              alignItems: "center",
+              flexWrap: "wrap"  // 🔹 يجعل الأزرار تنزل تحت بعضها إذا لم تكفي المساحة
+            }}
+          >
             <Button
-              onClick={() =>
-                nav(`/admin-dashboard/all-clients/${row._id}`)
-                // console.log(row._id)
-              }
+              onClick={() => nav(`/admin-dashboard/all-clients/${row._id}`)}
               sx={{
                 backgroundColor: colors.blueAccent[500],
                 color: colors.grey[100],
@@ -99,6 +103,7 @@ const Contacts = () => {
                 borderRadius: "5px",
                 padding: "5px 10px",
                 cursor: "pointer",
+                minWidth: "80px",  // 🔹 عرض الزر مناسب
               }}
             >
               Edit
@@ -112,11 +117,12 @@ const Contacts = () => {
                 borderRadius: "5px",
                 padding: "5px 10px",
                 cursor: "pointer",
+                minWidth: "80px",  // 🔹 عرض الزر مناسب
               }}
             >
               Delete
             </Button>
-          </Box >
+          </Box>
         );
       },
     }
@@ -132,10 +138,10 @@ const Contacts = () => {
         m="40px 0 0 0"
         height="75vh"
         sx={{
+          minWidth: "1000px",  // 🔹 تأكد من وجود مساحة كافية للجدول
           overflowX: "auto", // إضافة سكرول عند الحاجة
           "& .MuiDataGrid-root": {
             border: "none",
-            minWidth: "900px", // التأكد من عدم تصغير الجدول أكثر من اللازم
           },
           "& .MuiDataGrid-cell": {
             borderBottom: "none",
