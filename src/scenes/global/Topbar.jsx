@@ -11,10 +11,10 @@ import SearchIcon from "@mui/icons-material/Search";
 import { Link, useNavigate } from "react-router-dom";
 import { jwtDecode } from 'jwt-decode';
 import socket from '../../components/constants/soket'
-import { Adb } from "@mui/icons-material";
+import { Adb, MenuOutlined } from "@mui/icons-material";
 import { BASE_URL } from "../../components/constants/baseurl";
 import axios from "axios";
-const Topbar = () => {
+const Topbar = ({ isCollapsed, setIsCollapsed, left, setLeft }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const colorMode = useContext(ColorModeContext);
@@ -142,7 +142,13 @@ const Topbar = () => {
         </Box>
     );
     return (
-        <Box sx={{ justifyContent: 'end' }} display="flex" justifyContent="space-between" p={2}>
+        <Box sx={{ justifyContent: 'end' }} display="flex" justifyContent="space-between" alignItems='center' p={2}>
+            <IconButton sx={{ display: { sm: 'block', md: 'none' }, lineHeight: '0' }} onClick={() => {
+                setIsCollapsed(!isCollapsed);
+            }
+            }>
+                <MenuOutlined />
+            </IconButton>
             {/* SEARCH BAR */}
             {/* <Box
                 display="flex"

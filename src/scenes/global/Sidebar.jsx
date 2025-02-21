@@ -36,13 +36,12 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
     );
 };
 
-const Sidebar = () => {
+const Sidebar = ({ isCollapsed, setIsCollapsed, left, setLeft }) => {
     const theme = useTheme();
     const token = localStorage.getItem('token');
     const [user, setUser] = useState('');
-
     const colors = tokens(theme.palette.mode);
-    const [isCollapsed, setIsCollapsed] = useState(true);
+    // const [isCollapsed, setIsCollapsed] = useState(true);
     const [selected, setSelected] = useState("Dashboard");
     useEffect(() => {
         if (token) {
@@ -72,7 +71,9 @@ const Sidebar = () => {
                     color: "#6870fa !important",
                 },
                 position: 'fixed',
+                left: { xs: isCollapsed && "-89px", md: '0' }, // إخفاء وإظهار السايد بار,
                 height: '100vh',
+                transition: 'left 0.7s ease-in-out',
                 zIndex: '1000',
             }}
         >
