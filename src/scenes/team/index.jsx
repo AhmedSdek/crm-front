@@ -82,7 +82,7 @@ const Team = () => {
     {
       field: "assignedClients",
       headerName: "Clients",
-      flex: 0.5,
+      flex: 1,
       renderCell: ({ row }) => {
         return (
           <Box display="flex" justifyContent="center" alignItems="center" width="100%">
