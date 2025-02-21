@@ -171,7 +171,7 @@ const Team = () => {
           overflowX: "auto", // إضافة سكرول عند الحاجة
           "& .MuiDataGrid-root": {
             border: "none",
-            minWidth: "700px", // التأكد من عدم تصغير الجدول أكثر من اللازم
+            minWidth: "900px", // التأكد من عدم تصغير الجدول أكثر من اللازم
           },
           "& .MuiDataGrid-cell": {
             borderBottom: "none",
