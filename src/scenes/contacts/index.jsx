@@ -6,12 +6,18 @@ import Header from "../../components/Header";
 import { useTheme } from "@mui/material";
 import { useGetAllClientsQuery } from "../../redux/apiSlice";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../../components/constants/baseurl";
 
 const Contacts = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const nav = useNavigate()
-
+  const handleDeleteClient = (id) => {
+    // تنفيذ استدعاء DELETE باستخدام API Slice
+    fetch(`${BASE_URL}/api/clients/${id}`, { method: 'DELETE' })
+      .then(() => console.log(`Client with ID ${id} deleted`))
+      .catch((err) => console.error(err));
+  };
   const { data: clients, error: clientsError, isLoading: clientsLoading } =
     useGetAllClientsQuery(undefined, {
       refetchOnMountOrArgChange: true, // تحديث البيانات عند تحميل المكون
@@ -86,8 +92,8 @@ const Contacts = () => {
             >
               Edit
             </Button>
-            {/* <Button
-              onClick={() => handleDelete(row._id)}
+            <Button
+              onClick={() => handleDeleteClient(row._id)}
               sx={{
                 backgroundColor: colors.redAccent[600],
                 color: colors.grey[100],
@@ -98,7 +104,7 @@ const Contacts = () => {
               }}
             >
               Delete
-            </Button> */}
+            </Button>
           </Box >
         );
       },
