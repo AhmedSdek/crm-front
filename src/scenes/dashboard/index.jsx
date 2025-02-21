@@ -84,8 +84,7 @@ const Dashboard = () => {
             width: '100%',
             gap: 3, // المسافة بين البوكسات
             justifyContent: 'space-between', // توزيع العناصر بالتساوي
-            alignItems: 'center', // محاذاة العناصر في المنتصف
-            p: 2, // حواف داخلية للمكدس
+            alignItems: 'center', // حواف داخلية للمكدس
           }}>
             <Box
               sx={{
