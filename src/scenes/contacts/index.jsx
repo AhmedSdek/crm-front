@@ -23,7 +23,6 @@ const Contacts = () => {
       refetchOnMountOrArgChange: true, // تحديث البيانات عند تحميل المكون
       refetchOnFocus: true,            // تحديث البيانات عند التركيز على الصفحة
     });
-  console.log(clients)
   const columns = [
     {
       field: "firstName",
@@ -70,10 +69,10 @@ const Contacts = () => {
       },
     }, {
       headerName: "Action",
-      flex: 0.7,
+      flex: 1,
       renderCell: ({ row }) => {
         return (
-          <Box sx={{ gap: 2 }} display="flex" justifyContent="space-around"
+          <Box sx={{ gap: 2 }} display="flex" justifyContent="space-between"
             m="auto"
             p="5px">
             <Button
