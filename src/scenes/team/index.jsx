@@ -58,7 +58,7 @@ const Team = () => {
             m="auto"
             p="5px"
             display="flex"
-            justifyContent="center"
+            justifyContent="start"
             alignItems='center'
             backgroundColor={
               role === "admin"
@@ -85,7 +85,7 @@ const Team = () => {
       flex: 1,
       renderCell: ({ row }) => {
         return (
-          <Box display="flex" justifyContent="center" alignItems="center" width="100%">
+          <Box display="flex" justifyContent="start" alignItems="center" width="100%">
             {row.assignedClients ? row.assignedClients.length : 0}
           </Box>
         );
