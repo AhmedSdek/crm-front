@@ -111,7 +111,7 @@ const Contacts = () => {
   ];
 
   return (
-    <Box m="20px">
+    <Box sx={{ overflowX: "auto" }} m="20px">
       <Header
         title="Leads"
         subtitle="List of Leads"
