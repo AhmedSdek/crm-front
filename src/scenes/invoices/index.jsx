@@ -49,11 +49,10 @@ const Invoices = () => {
         m="40px 0 0 0"
         height="75vh"
         sx={{
-          overflowX: "auto", // إضافة سكرول عند الحاجة
-
+          overflowX: "auto", // السماح بالتمرير الأفقي
           "& .MuiDataGrid-root": {
             border: "none",
-            minWidth: "700px",
+            minWidth: "700px", // ضمان عدم تصغير الجدول كثيرًا
           },
           "& .MuiDataGrid-cell": {
             borderBottom: "none",
