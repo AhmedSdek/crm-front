@@ -244,7 +244,7 @@ const Contacts = () => {
         <DataGrid
           slots={{
             toolbar: GridToolbar,
-          }}
+          }} 
           components={{ Toolbar: GridToolbar }}
           checkboxSelection rows={clients && clients} getRowId={(row) => row._id} columns={columns} />
       </Box>
