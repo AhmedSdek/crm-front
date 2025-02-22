@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Avatar, Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -18,7 +18,7 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import { jwtDecode } from "jwt-decode";
 import './scroll.css'
-const Item = ({ title, to, icon, selected, setSelected }) => {
+const Item = ({ title, to, icon, selected, setSelected, setIsCollapsed }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     return (
@@ -27,7 +27,10 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
             style={{
                 color: colors.grey[100],
             }}
-            onClick={() => setSelected(title)}
+            onClick={() => {
+                setSelected(title);
+                setIsCollapsed(true); // إغلاق القائمة عند النقر
+            }}
             icon={icon}
         >
             <Typography>{title}</Typography>
@@ -36,13 +39,27 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
     );
 };
 
+
 const Sidebar = ({ isCollapsed, setIsCollapsed, left, setLeft }) => {
     const theme = useTheme();
     const token = localStorage.getItem('token');
     const [user, setUser] = useState('');
+    const sidebarRef = useRef(null); // إنشاء مرجع للسايدبار
     const colors = tokens(theme.palette.mode);
     // const [isCollapsed, setIsCollapsed] = useState(true);
     const [selected, setSelected] = useState("Dashboard");
+    useEffect(() => {
+        function handleClickOutside(event) {
+            if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+                setIsCollapsed(true); // إغلاق القائمة إذا كان النقر خارجها
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
     useEffect(() => {
         if (token) {
             setUser(jwtDecode(token));
@@ -54,6 +71,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, left, setLeft }) => {
     }, [token]);
     return (
         <Box
+            ref={sidebarRef}
             sx={{
                 "& .pro-sidebar-inner": {
                     background: `${colors.primary[400]} !important`,
@@ -133,6 +151,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, left, setLeft }) => {
                             icon={<HomeOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
+                            setIsCollapsed={setIsCollapsed}
                         />
 
                         <Typography
@@ -148,6 +167,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, left, setLeft }) => {
                             icon={<PeopleOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
+                            setIsCollapsed={setIsCollapsed}
                         />
                         <Item
                             title="Leads Information"
@@ -155,6 +175,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, left, setLeft }) => {
                             icon={<ContactsOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
+                            setIsCollapsed={setIsCollapsed}
                         />
                         {/* <Item
                             title="Invoices Balances"
@@ -177,6 +198,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, left, setLeft }) => {
                             icon={<PersonOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
+                            setIsCollapsed={setIsCollapsed}
                         />
                         <Item
                             title="Create Sales"
@@ -184,6 +206,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, left, setLeft }) => {
                             icon={<PersonOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
+                            setIsCollapsed={setIsCollapsed}
                         />
                         {/* <Item
                             title="All Clients"
@@ -199,6 +222,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, left, setLeft }) => {
                             icon={<CalendarTodayOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
+                            setIsCollapsed={setIsCollapsed}
                         />
                         {/* <Item
                             title="FAQ Page"
