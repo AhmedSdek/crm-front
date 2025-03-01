@@ -102,7 +102,7 @@ const Dashboard = () => {
               }}
             >
               <StatBox
-                title={clients && clients.length}
+                title={clients ? clients.length : 0}
                 subtitle="Clients"
                 progress={`0.${clients && clients.length}`}
                 // increase="+14%"
@@ -129,7 +129,7 @@ const Dashboard = () => {
               }}
             >
               <StatBox
-                title={users && users.length}
+                title={users ? users.length : 0}
                 subtitle="Sales"
                 progress={`0.${users && users.length}`}
                 // increase="+14%"

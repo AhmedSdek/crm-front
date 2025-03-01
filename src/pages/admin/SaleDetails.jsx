@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { BASE_URL } from '../../components/constants/baseurl';
-import { Accordion, AccordionDetails, AccordionSummary, Box, Container, Divider, Paper, Stack, Typography } from '@mui/material';
-import { ExpandMore } from '@mui/icons-material';
-import moment from 'moment';
+import { Box, Container, Stack, Typography, useTheme } from '@mui/material';
+import { PeopleSharp } from '@mui/icons-material';
+import { tokens } from '../../theme';
+import StatBox from '../../components/StatBox';
 
 function SaleDetails() {
     const { id } = useParams();
     const [sale, setSale] = useState();
     const [clients, setClients] = useState([]);
+    const theme = useTheme();
+    const colors = tokens(theme.palette.mode);
     const newLeadClients = clients.filter(client => client.status === "New Lead");
     const InterestedClients = clients.filter(client => client.status === "Interested");
     const NoAnswerClients = clients.filter(client => client.status === "No Answer");
@@ -17,9 +20,6 @@ function SaleDetails() {
     const ContractedClients = clients.filter(client => client.status === "Contracted");
     const AttendVisitClients = clients.filter(client => client.status === "Attend Visit");
     const ArchiveClients = clients.filter(client => client.status === "Archive");
-
-    // console.log(newLeadClients)
-    // console.log(sale)
     useEffect(() => {
         fetchUsers()
     }, []);
@@ -41,7 +41,360 @@ function SaleDetails() {
                     <Typography sx={{ textAlign: 'center', padding: '10px' }}>
                         {sale && sale.name}  Details
                     </Typography>
-                    <Stack sx={{ gap: 2 }}>
+                    <Stack sx={{
+                        flexDirection: { xs: 'column', md: 'row' },
+                        width: '100%',
+                        gap: 3, // المسافة بين البوكسات
+                        justifyContent: 'space-between', // توزيع العناصر بالتساوي
+                        alignItems: 'center', // حواف داخلية للمكدس
+                        flexWrap: 'wrap',
+                        padding: "10px 0"
+                    }}>
+                        <Link
+                            to={`/admin-dashboard/team/${id}/New Lead`}
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                flex: 1,
+                                width: 'inherit',
+                                minWidth: '250px', // الحد الأدنى لعرض البوكس
+                                height: '150px',
+                                borderRadius: '12px', // زوايا دائرية
+                                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)', // إضافة ظل
+                                p: 2
+                            }}>
+                            <Box
+                                sx={{
+                                    backgroundColor: colors.primary[400],
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    // flex: 1,
+                                    width: '100%',
+                                    // minWidth: '250px', // الحد الأدنى لعرض البوكس
+                                    height: '100%',
+                                    borderRadius: '12px', // زوايا دائرية
+                                    // boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)', // إضافة ظل
+                                    p: 2
+                                }}
+                            >
+                                <StatBox
+                                    title={newLeadClients ? newLeadClients.length : 0}
+                                    subtitle="New Lead"
+                                    progress={`0.${newLeadClients.length}`}
+                                    // increase="+14%"
+                                    icon={
+                                        <PeopleSharp
+                                            sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                                        />
+                                    }
+                                />
+                            </Box>
+                        </Link>
+                        <Link
+                            to={`/admin-dashboard/team/${id}/Interested`}
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                flex: 1,
+                                width: 'inherit',
+                                minWidth: '250px', // الحد الأدنى لعرض البوكس
+                                height: '150px',
+                                borderRadius: '12px', // زوايا دائرية
+                                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)', // إضافة ظل
+                                p: 2
+                            }}>
+                            <Box
+                                sx={{
+                                    backgroundColor: colors.primary[400],
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    // flex: 1,
+                                    width: '100%',
+                                    // minWidth: '250px', // الحد الأدنى لعرض البوكس
+                                    height: '100%',
+                                    borderRadius: '12px', // زوايا دائرية
+                                    // boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)', // إضافة ظل
+                                    p: 2
+                                }}
+                            >
+                                <StatBox
+                                    title={InterestedClients ? InterestedClients.length : 0}
+                                    subtitle="Interested"
+                                    progress={`0.${InterestedClients.length}`}
+                                    // increase="+14%"
+                                    icon={
+                                        <PeopleSharp
+                                            sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                                        />
+                                    }
+                                />
+                            </Box>
+                        </Link>
+                        <Link
+                            to={`/admin-dashboard/team/${id}/No Answer`}
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                flex: 1,
+                                width: 'inherit',
+                                minWidth: '250px', // الحد الأدنى لعرض البوكس
+                                height: '150px',
+                                borderRadius: '12px', // زوايا دائرية
+                                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)', // إضافة ظل
+                                p: 2
+                            }}>
+                            <Box
+                                sx={{
+                                    backgroundColor: colors.primary[400],
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    // flex: 1,
+                                    width: '100%',
+                                    // minWidth: '250px', // الحد الأدنى لعرض البوكس
+                                    height: '100%',
+                                    borderRadius: '12px', // زوايا دائرية
+                                    // boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)', // إضافة ظل
+                                    p: 2
+                                }}
+                            >
+                                <StatBox
+                                    title={NoAnswerClients ? NoAnswerClients.length : 0}
+                                    subtitle="No Answer"
+                                    progress={`0.${NoAnswerClients.length}`}
+                                    // increase="+14%"
+                                    icon={
+                                        <PeopleSharp
+                                            sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                                        />
+                                    }
+                                />
+                            </Box>
+
+                        </Link>
+                        <Link
+                            to={`/admin-dashboard/team/${id}/Follow Up`}
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                flex: 1,
+                                width: 'inherit',
+                                minWidth: '250px', // الحد الأدنى لعرض البوكس
+                                height: '150px',
+                                borderRadius: '12px', // زوايا دائرية
+                                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)', // إضافة ظل
+                                p: 2
+                            }}>
+                            <Box
+                                sx={{
+                                    backgroundColor: colors.primary[400],
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    // flex: 1,
+                                    width: '100%',
+                                    // minWidth: '250px', // الحد الأدنى لعرض البوكس
+                                    height: '100%',
+                                    borderRadius: '12px', // زوايا دائرية
+                                    // boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)', // إضافة ظل
+                                    p: 2
+                                }}
+                            >
+                                <StatBox
+                                    title={FollowUpClients ? FollowUpClients.length : 0}
+                                    subtitle="Follow Up"
+                                    progress={`0.${FollowUpClients.length}`}
+                                    // increase="+14%"
+                                    icon={
+                                        <PeopleSharp
+                                            sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                                        />
+                                    }
+                                />
+                            </Box>
+                        </Link>
+                        <Link
+                            to={`/admin-dashboard/team/${id}/Reservation`}
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                flex: 1,
+                                width: 'inherit',
+                                minWidth: '250px', // الحد الأدنى لعرض البوكس
+                                height: '150px',
+                                borderRadius: '12px', // زوايا دائرية
+                                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)', // إضافة ظل
+                                p: 2
+                            }}>
+                            <Box
+                                sx={{
+                                    backgroundColor: colors.primary[400],
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    // flex: 1,
+                                    width: '100%',
+                                    // minWidth: '250px', // الحد الأدنى لعرض البوكس
+                                    height: '100%',
+                                    borderRadius: '12px', // زوايا دائرية
+                                    // boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)', // إضافة ظل
+                                    p: 2
+                                }}
+                            >
+                                <StatBox
+                                    title={ReservationClients ? ReservationClients.length : 0}
+                                    subtitle="Reservation"
+                                    progress={`0.${ReservationClients.length}`}
+                                    // increase="+14%"
+                                    icon={
+                                        <PeopleSharp
+                                            sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                                        />
+                                    }
+                                />
+                            </Box>
+                        </Link>
+                        <Link
+                            to={`/admin-dashboard/team/${id}/Contracted`}
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                flex: 1,
+                                width: 'inherit',
+                                minWidth: '250px', // الحد الأدنى لعرض البوكس
+                                height: '150px',
+                                borderRadius: '12px', // زوايا دائرية
+                                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)', // إضافة ظل
+                                p: 2
+                            }}>
+                            <Box
+                                sx={{
+                                    backgroundColor: colors.primary[400],
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    // flex: 1,
+                                    width: '100%',
+                                    // minWidth: '250px', // الحد الأدنى لعرض البوكس
+                                    height: '100%',
+                                    borderRadius: '12px', // زوايا دائرية
+                                    // boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)', // إضافة ظل
+                                    p: 2
+                                }}
+                            >
+                                <StatBox
+                                    title={ContractedClients ? ContractedClients.length : 0}
+                                    subtitle="Contracted"
+                                    progress={`0.${ContractedClients.length}`}
+                                    // increase="+14%"
+                                    icon={
+                                        <PeopleSharp
+                                            sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                                        />
+                                    }
+                                />
+                            </Box>
+                        </Link>
+                        <Link
+                            to={`/admin-dashboard/team/${id}/Attend Visit`} style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                flex: 1,
+                                width: 'inherit',
+                                minWidth: '250px', // الحد الأدنى لعرض البوكس
+                                height: '150px',
+                                borderRadius: '12px', // زوايا دائرية
+                                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)', // إضافة ظل
+                                p: 2
+                            }}>
+                            <Box
+                                sx={{
+                                    backgroundColor: colors.primary[400],
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    // flex: 1,
+                                    width: '100%',
+                                    // minWidth: '250px', // الحد الأدنى لعرض البوكس
+                                    height: '100%',
+                                    borderRadius: '12px', // زوايا دائرية
+                                    // boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)', // إضافة ظل
+                                    p: 2
+                                }}
+                            >
+                                <StatBox
+                                    title={AttendVisitClients ? AttendVisitClients.length : 0}
+                                    subtitle="Attend Visit"
+                                    progress={`0.${AttendVisitClients.length}`}
+                                    // increase="+14%"
+                                    icon={
+                                        <PeopleSharp
+                                            sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                                        />
+                                    }
+                                />
+                            </Box>
+                        </Link>
+                        <Link
+                            to={`/admin-dashboard/team/${id}/Archive`}
+                            style={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                flex: 1,
+                                width: 'inherit',
+                                minWidth: '250px', // الحد الأدنى لعرض البوكس
+                                height: '150px',
+                                borderRadius: '12px', // زوايا دائرية
+                                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)', // إضافة ظل
+                                p: 2
+                            }}>
+                            <Box
+                                sx={{
+                                    backgroundColor: colors.primary[400],
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    // flex: 1,
+                                    width: '100%',
+                                    // minWidth: '250px', // الحد الأدنى لعرض البوكس
+                                    height: '100%',
+                                    borderRadius: '12px', // زوايا دائرية
+                                    // boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)', // إضافة ظل
+                                    p: 2
+                                }}
+                            >
+                                <StatBox
+                                    title={ArchiveClients ? ArchiveClients.length : 0}
+                                    subtitle="Archive"
+                                    progress={`0.${ArchiveClients.length}`}
+                                    // increase="+14%"
+                                    icon={
+                                        <PeopleSharp
+                                            sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                                        />
+                                    }
+                                />
+                            </Box>
+                        </Link>
+                    </Stack>
+                </Stack>
+            </Container >
+        </div >
+    )
+}
+
+export default SaleDetails
+{/* <Stack sx={{ gap: 2 }}>
                         <Accordion>
                             <AccordionSummary
                                 aria-controls="panel1-content"
@@ -429,11 +782,4 @@ function SaleDetails() {
                                 })}
                             </AccordionDetails>
                         </Accordion>
-                    </Stack>
-                </Stack>
-            </Container >
-        </div >
-    )
-}
-
-export default SaleDetails
+                    </Stack> */}

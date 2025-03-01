@@ -33,6 +33,7 @@ import FAQ from './scenes/faq/index.jsx';
 import Calendar from './scenes/calendar/calendar.jsx';
 import { jwtDecode } from 'jwt-decode';
 import socket from './components/constants/soket.jsx';
+import LeadDetails from './pages/admin/LeadDetails.jsx'
 
 // const socket = io('https://crm-back-production-d0b7.up.railway.app'); // عنوان السيرفر
 function App() {
@@ -87,6 +88,7 @@ function App() {
                   <Route path="clients" element={<Clients />} />
                   <Route path="all-sales" element={<AllSales />} />
                   <Route path="team/:id" element={<SaleDetails />} />
+                  <Route path="team/:id/:status" element={<LeadDetails />} />
                   <Route path="create-sales" element={<CreateSalesUser />} />
                   {/* <Route path="all-clients" element={<AllClients />} /> */}
                   <Route path="all-clients/:id" element={<AdminClientDetails />} />
