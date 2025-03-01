@@ -219,10 +219,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Button, Container, Divider, FormControl, IconButton, InputLabel, MenuItem, Select, Stack, TextField, Typography } from '@mui/material';
+import { Button, Container, Divider, FormControl, IconButton, InputLabel, MenuItem, Paper, Select, Stack, TextField, Typography } from '@mui/material';
 import { LocalPhone, WhatsApp } from '@mui/icons-material';
 import { useGetAllUsersQuery, useGetAllClientsQuery, useUpdateClientMutation } from '../../redux/apiSlice';
 import Swal from 'sweetalert2';
+import moment from 'moment';
 
 function AdminClientDetails() {
     const { id } = useParams();
@@ -230,6 +231,7 @@ function AdminClientDetails() {
     const { data: users } = useGetAllUsersQuery(); // جلب بيانات المستخدمين
     const [updateClient] = useUpdateClientMutation(); // تعديل العميل
     const [editedData, setEditedData] = useState({});
+    // console.log(editedData)
 
     useEffect(() => {
         if (client) {
@@ -283,6 +285,7 @@ function AdminClientDetails() {
                     <Typography variant="h5">
                         {`${editedData.firstName || ''} ${editedData.lastName || ''}`}
                     </Typography>
+
                     <Typography>{`Phone: ${editedData.phone || ''}`}</Typography>
                     <a style={{ width: 'fit-content', borderRadius: '50%' }} href={`tel:${editedData.phone}`}>
                         <IconButton>
@@ -394,6 +397,12 @@ function AdminClientDetails() {
                             ))}
                         </Select>
                     </FormControl>
+                    <TextField
+                        label="Created At"
+                        name="Created At"
+                        value={moment(editedData.createdAt).format("YYYY-MM-DD HH:mm:ss")}
+                        disabled
+                    />
                     <Button variant="contained" color="primary" onClick={handleUpdate}>
                         Update Client
                     </Button>

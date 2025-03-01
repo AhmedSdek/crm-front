@@ -5,7 +5,6 @@ import { Container, Divider, Paper, Stack, Typography } from '@mui/material';
 
 function LeadDetails() {
     const { status, id } = useParams();
-    console.log(status)
     const [data, setData] = useState(null);
     const [filteredClients, setFilteredClients] = useState([]);
     console.log(filteredClients)
@@ -40,17 +39,17 @@ function LeadDetails() {
                             filteredClients.map((item, index) => {
                                 return (
                                     <Link to={`/admin-dashboard/all-clients/${item._id}`} key={index}>
-                                        <Paper sx={{ padding: '10px' }}>
-                                            <Typography>
-                                                {`Lead Name : ${item.firstName} ${item.lastName}`}
+                                        <Paper sx={{ padding: '20px' }}>
+                                            <Typography sx={{ fontWeight: 'bold', fontSize: '21px' }}>
+                                                {`${item.firstName} ${item.lastName}`}
                                             </Typography>
                                             <Typography>
-                                                {`Phone Number : ${item.phone}`}
+                                                {`${item.phone}`}
                                             </Typography>
-                                            <Typography>
+                                            {/* <Typography>
                                                 {`whatsapp Number : ${item.whatsapp}`}
-                                            </Typography>
-                                            <Typography>
+                                            </Typography> */}
+                                            {/* <Typography>
                                                 {`email : ${item.email}`}
                                             </Typography>
                                             <Typography>
@@ -64,10 +63,10 @@ function LeadDetails() {
                                             </Typography>
                                             <Typography>
                                                 {`developer : ${item.developer}`}
-                                            </Typography>
-                                            <Typography>
+                                            </Typography> */}
+                                            {/* <Typography>
                                                 {`created At : ${item.createdAt}`}
-                                            </Typography>
+                                            </Typography> */}
                                         </Paper>
                                     </Link>
                                 )
