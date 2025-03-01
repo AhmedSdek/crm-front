@@ -16,7 +16,7 @@ import { io } from 'socket.io-client';
 //     reconnection: true,
 //     withCredentials: true
 // });
-const socket = io('https://crm-back-production-d0b7.up.railway.app', {
+const socket = io('https://crm-back-production-32bf.up.railway.app', {
     transports: ['websocket', 'polling'],
     reconnection: true,
     withCredentials: true
