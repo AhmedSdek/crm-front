@@ -124,6 +124,17 @@ function AdminClientDetails() {
                             <MenuItem value="Archive">Archive</MenuItem>
                         </Select>
                     </FormControl>
+                    {/* إظهار حقل "Call Back Date" فقط إذا كان status = Follow Up */}
+                    {/* {editedData.status === "Follow Up" && (
+                        <TextField
+                            label="Call Back Date & Time"
+                            type="datetime-local"  // ✅ تغيير النوع ليشمل الوقت مع التاريخ
+                            name="callBackDate"
+                            value={editedData.callBackDate || ''}
+                            onChange={handleInputChange}
+                            InputLabelProps={{ shrink: true }} // ✅ يضمن بقاء الـ label في الأعلى
+                        />
+                    )} */}
                     <TextField
                         label="WhatsApp"
                         name="whatsapp"
@@ -184,6 +195,12 @@ function AdminClientDetails() {
                         label="Created At"
                         name="Created At"
                         value={moment(editedData.createdAt).format("YYYY-MM-DD HH:mm:ss")}
+                        disabled
+                    />
+                    <TextField
+                        label="Modified Time"
+                        name="Modified Time"
+                        value={moment(editedData.modifiedTime).format("YYYY-MM-DD HH:mm:ss")}
                         disabled
                     />
                     <Button variant="contained" color="primary" onClick={handleUpdate}>
