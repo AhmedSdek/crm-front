@@ -96,7 +96,7 @@ const baseQuery = fetchBaseQuery({
 // دالة `baseQuery` مخصصة لإدارة الأخطاء
 const baseQueryWithAuth = async (args, api, extraOptions) => {
     let result = await baseQuery(args, api, extraOptions);
-    console.log(result)
+    // console.log(result)
 
     // في حالة انتهاء صلاحية التوكن، تسجيل خروج المستخدم
     if (result.error && result.error.status === 403) {

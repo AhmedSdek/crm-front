@@ -301,7 +301,7 @@ const Dashboard = () => {
 
           {/* ROW 3 */}
           <Stack>
-            <Box
+            {/* <Box
               backgroundColor={colors.primary[400]}
               p="30px 0"
             >
@@ -324,7 +324,7 @@ const Dashboard = () => {
                 </Typography>
                 <Typography>Includes extra misc expenditures and costs</Typography>
               </Box>
-            </Box>
+            </Box> */}
             <Box
               backgroundColor={colors.primary[400]}
             >
@@ -333,7 +333,7 @@ const Dashboard = () => {
                 fontWeight="600"
                 sx={{ padding: "5px 30px" }}
               >
-                Sales Quantity
+                Sales
               </Typography>
               <BarChart isDashboard={true} />
             </Box>
