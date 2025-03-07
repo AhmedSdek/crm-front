@@ -33,7 +33,7 @@ const LoginPage = () => {
                 if (data.role === 'admin') {
                     window.location.pathname = '/admin-dashboard'; // توجيه الأدمن
                 } else if (data.role === 'sales') {
-                    navigate('/'); // توجيه السيلز
+                    navigate('/allleads'); // توجيه السيلز
                 }
             } else {
                 alert(data.message);

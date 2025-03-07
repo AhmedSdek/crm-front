@@ -193,7 +193,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, left, setLeft }) => {
                             Pages
                         </Typography>
                         <Item
-                            title="Add Clients"
+                            title="Add Lead"
                             to="admin-dashboard/clients"
                             icon={<PersonOutlinedIcon />}
                             selected={selected}

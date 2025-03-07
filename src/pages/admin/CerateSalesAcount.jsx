@@ -9,17 +9,14 @@ const CreateSalesUser = () => {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [message, setMessage] = useState('');
-
     const handleCreateSales = async (e) => {
         e.preventDefault();
-
         try {
             const response = await fetch(`${BASE_URL}/api/sales/create-sales`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ name, email, phone }),
             });
-
             const data = await response.json();
             if (response.ok) {
                 setMessage('تم إنشاء حساب السيلز وإرسال الإيميل بنجاح.');

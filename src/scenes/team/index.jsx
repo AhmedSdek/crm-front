@@ -15,6 +15,7 @@ const Team = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [sales, setSales] = useState([]);
+  console.log(sales)
   const nav = useNavigate()
   useEffect(() => {
     fetchUsers()
@@ -44,6 +45,11 @@ const Team = () => {
     },
     {
       field: "email",
+      headerName: "Login Email",
+      flex: 1,
+    },
+    {
+      field: "realemail",
       headerName: "Email",
       flex: 1,
     },
@@ -81,7 +87,7 @@ const Team = () => {
     {
       field: "assignedClients",
       headerName: "Clients",
-      flex: 1,
+      flex: 0.5,
       renderCell: ({ row }) => {
         return (
           <Box display="flex" justifyContent="center" alignItems="center" width="100%">

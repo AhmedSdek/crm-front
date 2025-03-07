@@ -7,14 +7,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SignUpPage from './pages/auth/SignUp.jsx'
 import LoginPage from './pages/auth/Login.jsx'
-import AdminDashboard from './pages/admin/AdminDashboard.jsx'
 import PrivateRoute from './components/PrivateRoute.jsx'
 import CreateSalesUser from './pages/admin/CerateSalesAcount.jsx'
 import AllLeads from './pages/sales/AllLeads.jsx'
 import ClientDetails from './pages/sales/ClientDetails.jsx'
 import AddClient from './pages/sales/AddClient.jsx'
 import AdminClientDetails from './pages/admin/AdminClientDetails.jsx'
-import AllSales from './pages/admin/AllSales.jsx'
 import SaleDetails from './pages/admin/SaleDetails.jsx'
 import Setting from './pages/sales/Setting.jsx'
 import { CssBaseline, Stack, ThemeProvider } from '@mui/material';
@@ -33,9 +31,6 @@ import FAQ from './scenes/faq/index.jsx';
 import Calendar from './scenes/calendar/calendar.jsx';
 import { jwtDecode } from 'jwt-decode';
 import socket from './components/constants/soket.jsx';
-import LeadDetails from './pages/admin/LeadDetails.jsx'
-
-// const socket = io('https://crm-back-production-d0b7.up.railway.app'); // عنوان السيرفر
 function App() {
   const [theme, colorMode] = useMode();
   const [user, setUser] = useState(null);
@@ -84,11 +79,11 @@ function App() {
               <ToastContainer />
               <Routes>
                 <Route path="/admin-dashboard" element={<PrivateRoute requiredRole="admin" />}>
-                  <Route index element={<Dashboard />} />
+                  <Route index element={<Dashboard />} /> 
                   <Route path="clients" element={<Clients />} />
-                  <Route path="all-sales" element={<AllSales />} />
+                  {/* <Route path="all-sales" element={<AllSales />} /> */}
                   <Route path="team/:id" element={<SaleDetails />} />
-                  <Route path="team/:id/:status" element={<LeadDetails />} />
+                  {/* <Route path="team/:id/:status" element={<LeadDetails />} /> */}
                   <Route path="create-sales" element={<CreateSalesUser />} />
                   {/* <Route path="all-clients" element={<AllClients />} /> */}
                   <Route path="all-clients/:id" element={<AdminClientDetails />} />

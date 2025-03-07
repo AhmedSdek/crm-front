@@ -22,11 +22,13 @@ const Dashboard = () => {
   // const [isSidebar, setIsSidebar] = useState(false);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const { data: clients, error: clientsError, isLoading: clientsLoading } =
+  const [salse, setSalse] = useState([]);
+  const { data: clients = [], error: clientsError, isLoading: clientsLoading } =
     useGetAllClientsQuery(undefined, {
       refetchOnMountOrArgChange: true, // تحديث البيانات عند تحميل المكون
       refetchOnFocus: true,            // تحديث البيانات عند التركيز على الصفحة
     });
+  // console.log(clients)
 
   const { data: newLeadsData, error: newLeadsError, isLoading: newLeadsLoading } =
     useGetNewLeadsQuery(undefined, {
@@ -34,12 +36,12 @@ const Dashboard = () => {
       refetchOnFocus: true,
     });
 
-  const { data: users, error: usersError, isLoading: usersLoading } =
+  const { data: users = [], error: usersError, isLoading: usersLoading } =
     useGetAllUsersQuery(undefined, {
       refetchOnMountOrArgChange: true,
       refetchOnFocus: true,
     });
-  // console.log(newLeadsData)
+  // console.log(users)
 
   // حفظ العملاء الجدد في حالة (state)
   const [newLeads, setNewLeads] = useState([]);
@@ -49,7 +51,11 @@ const Dashboard = () => {
     if (newLeadsData) {
       setNewLeads(newLeadsData);
     }
-  }, [newLeadsData]);
+    if (users) {
+      const salesUsers = users.filter(user => user.role === "sales");
+      setSalse(salesUsers);
+    }
+  }, [newLeadsData, users]);
 
 
   return (
@@ -103,7 +109,7 @@ const Dashboard = () => {
             >
               <StatBox
                 title={clients ? clients.length : 0}
-                subtitle="Clients"
+                subtitle="Leads"
                 progress={`0.${clients && clients.length}`}
                 // increase="+14%"
                 icon={
@@ -129,9 +135,9 @@ const Dashboard = () => {
               }}
             >
               <StatBox
-                title={users ? users.length : 0}
+                title={salse ? salse.length : 0}
                 subtitle="Sales"
-                progress={`0.${users && users.length}`}
+                progress={`0.${salse && salse.length}`}
                 // increase="+14%"
                 icon={
                   <PeopleSharp
@@ -176,7 +182,7 @@ const Dashboard = () => {
             >
               <StatBox
                 title={newLeads && newLeads.length}
-                subtitle="New Clients"
+                subtitle="New Leads"
                 progress={`0.${newLeads && newLeads.length}`}
                 // increase="0"
                 icon={
@@ -247,7 +253,7 @@ const Dashboard = () => {
             <Box height="250px" m="-20px 0 0 0">
               <LineChart isDashboard={true} />
             </Box>
-          </Box>
+          </Box> */}
           <Box
             gridColumn="span 4"
             gridRow="span 2"
@@ -263,12 +269,15 @@ const Dashboard = () => {
               p="15px"
             >
               <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
-                Recent Transactions
+                Sales Name
+              </Typography>
+              <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
+                Contracted Leads
               </Typography>
             </Box>
-            {mockTransactions.map((transaction, i) => (
+            {salse.map((sale, i) => (
               <Box
-                key={`${transaction.txId}-${i}`}
+                key={i}
                 display="flex"
                 justifyContent="space-between"
                 alignItems="center"
@@ -276,28 +285,28 @@ const Dashboard = () => {
                 p="15px"
               >
                 <Box>
-                  <Typography
+                  {/* <Typography
                     color={colors.greenAccent[500]}
                     variant="h5"
                     fontWeight="600"
                   >
                     {transaction.txId}
-                  </Typography>
+                  </Typography> */}
                   <Typography color={colors.grey[100]}>
-                    {transaction.user}
+                    {sale.name}
                   </Typography>
                 </Box>
-                <Box color={colors.grey[100]}>{transaction.date}</Box>
+                {/* <Box color={colors.grey[100]}>{transaction.date}</Box> */}
                 <Box
                   backgroundColor={colors.greenAccent[500]}
                   p="5px 10px"
                   borderRadius="4px"
                 >
-                  ${transaction.cost}
+                  {sale.assignedClients.filter(client => client.status === 'Contracted').length}
                 </Box>
               </Box>
             ))}
-          </Box> */}
+          </Box>
 
           {/* ROW 3 */}
           <Stack>
@@ -354,7 +363,7 @@ const Dashboard = () => {
           <Box height="200px">
             <GeographyChart isDashboard={true} />
           </Box>
-        </Box> */}
+          </Box> */}
         </Stack>
       </Box>
     </Container>

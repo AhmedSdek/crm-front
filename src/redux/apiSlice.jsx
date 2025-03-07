@@ -122,6 +122,9 @@ export const apiSlice = createApi({
         getAllUsers: builder.query({
             query: () => '/users/',
         }),
+        getUserById: builder.query({
+            query: (id) => `/users/${id}`,
+        }),
         getNewLeads: builder.query({
             query: () => '/clients?status=New Lead',
         }),
@@ -179,6 +182,7 @@ export const {
     useUpdateClientMutation,
     useDeleteClientMutation,
     useGetAllUsersQuery,
-    useGetNewLeadsQuery
+    useGetNewLeadsQuery,
+    useGetUserByIdQuery
 } = apiSlice;
 

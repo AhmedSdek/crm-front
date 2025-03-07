@@ -4,35 +4,21 @@ import { BASE_URL } from '../../components/constants/baseurl';
 import { Box, Button, Typography, useTheme } from '@mui/material';
 import { tokens } from '../../theme';
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { useGetUserByIdQuery } from '../../redux/apiSlice';
 function SaleDetails() {
     const { id } = useParams();
-    const [sale, setSale] = useState();
     const [clients, setClients] = useState([]);
     const nav = useNavigate()
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    // const newLeadClients = clients.filter(client => client.status === "New Lead");
-    // const InterestedClients = clients.filter(client => client.status === "Interested");
-    // const NoAnswerClients = clients.filter(client => client.status === "No Answer");
-    // const FollowUpClients = clients.filter(client => client.status === "Follow Up");
-    // const ReservationClients = clients.filter(client => client.status === "Reservation");
-    // const ContractedClients = clients.filter(client => client.status === "Contracted");
-    // const AttendVisitClients = clients.filter(client => client.status === "Attend Visit");
-    // const ArchiveClients = clients.filter(client => client.status === "Archive");
+    const { data: user = {}, error: usersError, isLoading: usersLoading } =
+        useGetUserByIdQuery(id);
     useEffect(() => {
-        fetchUsers()
-    }, []);
-    const fetchUsers = async () => {
-        try {
-            const response = await fetch(`${BASE_URL}/api/users/${id}`);
-            const data = await response.json();
-            // console.log(data)
-            setSale(data);
-            setClients(data.assignedClients)
-        } catch (error) {
-            console.error('Error fetching users:', error.message);
+        if (user) {
+            setClients(user.assignedClients)
         }
-    };
+    }, [user]);
+    console.log(clients)
     const columns = [
         // { field: "id", headerName: "ID" },
         {
@@ -68,7 +54,7 @@ function SaleDetails() {
             renderCell: () => {
                 return (
                     <Box display="flex" justifyContent="center" alignItems="center" width="100%">
-                        {sale.name}
+                        {user.name}
                     </Box>
                 );
             },
@@ -118,7 +104,7 @@ function SaleDetails() {
     return (
         <Box m="20px">
             <Typography sx={{ textAlign: 'center', padding: '10px' }}>
-                {sale && sale.name}  Details
+                {user && user.name}  Details
             </Typography>
             <Box
                 m="40px 0 0 0"
