@@ -28,8 +28,6 @@ const Dashboard = () => {
       refetchOnMountOrArgChange: true, // تحديث البيانات عند تحميل المكون
       refetchOnFocus: true,            // تحديث البيانات عند التركيز على الصفحة
     });
-  // console.log(clients)
-
   const { data: newLeadsData, error: newLeadsError, isLoading: newLeadsLoading } =
     useGetNewLeadsQuery(undefined, {
       refetchOnMountOrArgChange: true,
@@ -269,13 +267,13 @@ const Dashboard = () => {
               p="15px"
             >
               <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
-                Sales Name
+                Top Achievers
               </Typography>
               <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
                 Contracted Leads
               </Typography>
             </Box>
-            {salse.map((sale, i) => (
+            {!usersLoading ? salse.map((sale, i) => (
               <Box
                 key={i}
                 display="flex"
@@ -305,7 +303,12 @@ const Dashboard = () => {
                   {sale.assignedClients.filter(client => client.status === 'Contracted').length}
                 </Box>
               </Box>
-            ))}
+            ))
+              :
+              <Typography>
+                Loading
+              </Typography>
+            }
           </Box>
 
           {/* ROW 3 */}
@@ -336,6 +339,7 @@ const Dashboard = () => {
             </Box> */}
             <Box
               backgroundColor={colors.primary[400]}
+              p="10px"
             >
               <Typography
                 variant="h5"

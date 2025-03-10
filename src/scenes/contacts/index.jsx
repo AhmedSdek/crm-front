@@ -150,6 +150,10 @@ const Contacts = () => {
       >
         <DataGrid
           checkboxSelection
+          pageSizeOptions={[5, 10, 20, 50]} // تحديد الخيارات المتاحة لعدد الصفوف في كل صفحة
+          initialState={{
+            pagination: { paginationModel: { pageSize: 10 } } // تحديد العدد الافتراضي للصفوف
+          }}
           rows={clients || []}
           getRowId={(row) => row._id} // ✅ تعيين معرف احتياطي عند الحاجة
           columns={columns}
