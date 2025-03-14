@@ -142,6 +142,16 @@ function ClientDetails() {
                                 InputLabelProps={{ shrink: true }} // ✅ يضمن بقاء الـ label في الأعلى
                             />
                         )}
+                        {editedData.status === "Attend Visit" && (
+                            <TextField
+                                label="Attend Visit Date & Time"
+                                type="datetime-local"  // ✅ تغيير النوع ليشمل الوقت مع التاريخ
+                                name="attendDate"
+                                value={editedData.attendDate || ''}
+                                onChange={handleInputChange}
+                                InputLabelProps={{ shrink: true }} // ✅ يضمن بقاء الـ label في الأعلى
+                            />
+                        )}
                         <TextField
                             label="WhatsApp"
                             name="whatsapp"
@@ -181,6 +191,8 @@ function ClientDetails() {
                         <TextField
                             type="datetime-local"
                             name="meetingDate"
+                            label="meeting Date & Time"
+                            InputLabelProps={{ shrink: true }} // ✅ يضمن بقاء الـ label في الأعلى
                             value={editedData.meetingDate || ''}
                             onChange={handleInputChange}
                         />

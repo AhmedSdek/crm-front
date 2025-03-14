@@ -225,6 +225,7 @@ function AdminClientDetails() {
     const { id } = useParams();
     const { data: client, isFetching } = useGetAllClientsQuery(); // جلب بيانات العميل
     const { data: users } = useGetAllUsersQuery(); // جلب بيانات المستخدمين
+    console.log(users)
     const [updateClient] = useUpdateClientMutation(); // تعديل العميل
     const [editedData, setEditedData] = useState({});
     const [originalData, setOriginalData] = useState({});
@@ -240,29 +241,84 @@ function AdminClientDetails() {
         }
     }, [client, id]);
 
+    // const handleInputChange = (e) => {
+    //     const { name, value } = e.target;
+    //     if (name === 'assignedTo') {
+    //         setEditedData({ ...editedData, assignedTo: { _id: value } });
+    //     } else {
+    //         setEditedData({ ...editedData, [name]: value });
+    //     }
+    // };
+
+    // const handleUpdate = async () => {
+    //     try {
+    //         // تحديد الحقول المعدلة فقط
+    //         const changes = {};
+    //         console.log(changes)
+    //         for (let key in editedData) {
+    //             if (editedData[key] !== originalData[key]) {
+    //                 changes[key] = editedData[key];
+    //             }
+    //         }
+
+    //         if (Object.keys(changes).length > 0) {
+    //             await updateClient({ id, updates: changes }).unwrap(); // إرسال التحديثات فقط
+    //             // alert('Client updated successfully');
+    //             Swal.fire({
+    //                 position: "top-end",
+    //                 icon: "success",
+    //                 title: "Client updated successfully",
+    //                 showConfirmButton: false,
+    //                 timer: 900
+    //             });
+    //         } else {
+    //             Swal.fire({
+    //                 icon: "info",
+    //                 title: "No changes",
+    //                 text: "No changes were made to the client data.",
+    //             });
+    //         }
+    //     } catch (error) {
+    //         console.error('Failed to update client:', error);
+    //         Swal.fire({
+    //             icon: "error",
+    //             title: "Oops...",
+    //             text: "Failed to update client",
+    //         });
+    //     }
+    // };
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        if (name === 'assignedTo') {
-            setEditedData({ ...editedData, assignedTo: { _id: value } });
-        } else {
-            setEditedData({ ...editedData, [name]: value });
-        }
+        setEditedData((prev) => {
+            if (name === 'assignedTo') {
+                return { ...prev, assignedTo: { _id: value } };
+            }
+            return { ...prev, [name]: value };
+        });
     };
 
     const handleUpdate = async () => {
         try {
-            // تحديد الحقول المعدلة فقط
             const changes = {};
-            console.log(changes)
+
+            // إضافة جميع الحقول المعدلة إلى changes
             for (let key in editedData) {
                 if (editedData[key] !== originalData[key]) {
                     changes[key] = editedData[key];
                 }
             }
 
+            // إضافة assignedTo دائمًا، حتى لو لم يتغير
+            if (editedData.assignedTo) {
+                changes.assignedTo = editedData.assignedTo;
+            }
+            // إضافة assignedTo دائمًا، حتى لو لم يتغير
+            if (editedData.status) {
+                changes.status = editedData.status;
+            }
+
             if (Object.keys(changes).length > 0) {
-                await updateClient({ id, updates: changes }).unwrap(); // إرسال التحديثات فقط
-                // alert('Client updated successfully');
+                await updateClient({ id, updates: changes }).unwrap();
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -360,6 +416,27 @@ function AdminClientDetails() {
                             <MenuItem value="Archive">Archive</MenuItem>
                         </Select>
                     </FormControl>
+                    {/* إظهار حقل "Call Back Date" فقط إذا كان status = Follow Up */}
+                    {editedData.status === "Follow Up" && (
+                        <TextField
+                            label="Call Back Date & Time"
+                            type="datetime-local"  // ✅ تغيير النوع ليشمل الوقت مع التاريخ
+                            name="callBackDate"
+                            value={editedData.callBackDate || ''}
+                            onChange={handleInputChange}
+                            InputLabelProps={{ shrink: true }} // ✅ يضمن بقاء الـ label في الأعلى
+                        />
+                    )}
+                    {editedData.status === "Attend Visit" && (
+                        <TextField
+                            label="Attend Visit Date & Time"
+                            type="datetime-local"  // ✅ تغيير النوع ليشمل الوقت مع التاريخ
+                            name="attendDate"
+                            value={editedData.attendDate || ''}
+                            onChange={handleInputChange}
+                            InputLabelProps={{ shrink: true }} // ✅ يضمن بقاء الـ label في الأعلى
+                        />
+                    )}
                     <TextField
                         label="WhatsApp"
                         name="whatsapp"
@@ -396,11 +473,15 @@ function AdminClientDetails() {
                         value={editedData.description || ''}
                         onChange={handleInputChange}
                     />
+
                     <TextField
-                        type="date"
+                        label="meeting Date & Time"
+                        type="datetime-local"  // ✅ تغيير النوع ليشمل الوقت مع التاريخ
+                        // label="meeting Date"
                         name="meetingDate"
                         value={editedData.meetingDate || ''}
                         onChange={handleInputChange}
+                        InputLabelProps={{ shrink: true }} // ✅ يضمن بقاء الـ label في الأعلى
                     />
                     <FormControl style={{ marginRight: '10px' }}>
                         <InputLabel>Assign To</InputLabel>
@@ -409,7 +490,7 @@ function AdminClientDetails() {
                             value={editedData.assignedTo?._id || ''}
                             onChange={handleInputChange}
                         >
-                            {users
+                            {users && users
                                 .filter((seller) => seller._id !== currentUserId)
                                 .map((seller) => (
                                     <MenuItem key={seller._id} value={seller._id}>
