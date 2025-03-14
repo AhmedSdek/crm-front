@@ -1,30 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
 import {
     Button,
     FormControl,
-    IconButton,
     InputLabel,
-    List,
-    ListItem,
-    ListItemText,
     MenuItem,
     Select,
     Stack,
     TextField,
 } from '@mui/material';
-import { Delete } from '@mui/icons-material';
 import Header from '../components/Header';
-import { useGetAllClientsQuery } from '../redux/apiSlice';
 import { BASE_URL } from '../components/constants/baseurl';
 import Swal from 'sweetalert2';
+import { useGetAllUsersQuery } from '../redux/apiSlice';
 
 const Clients = () => {
-    const { data: clients = [], isLoading: loadingClients, error: errorClients } = useGetAllClientsQuery();
-    const [users, setUsers] = useState([]);
+    // const [users, setUsers] = useState([]);
+    const { data: users = [] } = useGetAllUsersQuery(); // جلب بيانات المستخدمين
     const currentUserId = localStorage.getItem('sellerId');
     const [loading, setLoading] = useState(null);
-
     const [selectedSeller, setSelectedSeller] = useState('');
     const [newClient, setNewClient] = useState({
         firstName: '',
@@ -120,86 +113,6 @@ const Clients = () => {
                 });
                 console.error("Error:", err);
             });
-    };
-
-    // const handleCreateClient = () => {
-    //     if (!selectedSeller) {
-    //         alert('Please select a seller!');
-    //         return;
-    //     }
-    //     if (!newClient.phone || newClient.phone.trim() === '') {
-    //         alert('Please enter a valid phone number!');
-    //         return;
-    //     }
-    //     if (!newClient.email || newClient.email.trim() === '') {
-    //         alert('Please enter a valid email!');
-    //         return;
-    //     }
-    //     setLoading(true)
-    //     const clientWithSeller = { ...newClient, assignedTo: selectedSeller };
-    //     // تنفيذ استدعاء POST باستخدام API Slice
-    //     fetch(`${BASE_URL}/api/clients`, {
-    //         method: 'POST',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify(clientWithSeller),
-    //     })
-    //         .then((response) => {
-    //             response.json();
-    //             console.log(response.json())
-    //         })
-    //         .then(() => {
-    //             setNewClient({
-    //                 firstName: '',
-    //                 lastName: '',
-    //                 email: '',
-    //                 phone: '',
-    //                 developer: '',
-    //                 project: '',
-    //                 notes: '',
-    //                 leadSource: '',
-    //                 description: '',
-    //                 meetingDate: '',
-    //                 whatsapp: '',
-    //                 isBuyer: true,
-    //                 assignedTo: '',
-    //             });
-
-    //             Swal.fire({
-    //                 position: "top-end",
-    //                 icon: "success",
-    //                 title: "Lead Created Success",
-    //                 showConfirmButton: false,
-    //                 timer: 900
-    //             });
-    //             setLoading(false)
-    //         })
-    //         .catch((err) => {
-    //             setLoading(false);
-    //             Swal.fire({
-    //                 icon: "error",
-    //                 title: "Oops...",
-    //                 text: err,
-    //             });
-    //             console.error(err);
-    //         });
-    // };
-    const fetchUsers = async () => {
-        try {
-            const response = await fetch(`${BASE_URL}/api/users`);
-            const data = await response.json();
-            setUsers(data);
-        } catch (error) {
-            console.error('Error fetching users:', error.message);
-        }
-    };
-    useEffect(() => {
-        fetchUsers();
-    }, []);
-    const handleDeleteClient = (id) => {
-        // تنفيذ استدعاء DELETE باستخدام API Slice
-        fetch(`${BASE_URL}/api/clients/${id}`, { method: 'DELETE' })
-            .then(() => console.log(`Client with ID ${id} deleted`))
-            .catch((err) => console.error(err));
     };
 
     return (
@@ -302,7 +215,7 @@ const Clients = () => {
                 </Button>
             </Stack>
 
-            <List>
+            {/* <List>
                 {clients.map((client) => (
                     <ListItem key={client._id} style={{ borderBottom: '1px solid #ccc' }}>
                         <ListItemText primary={`${client.firstName} ${client.lastName}`} secondary={client.email} />
@@ -311,7 +224,7 @@ const Clients = () => {
                         </IconButton>
                     </ListItem>
                 ))}
-            </List>
+            </List> */}
         </div>
     );
 };

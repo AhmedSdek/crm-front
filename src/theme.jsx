@@ -190,8 +190,38 @@ export const themeSettings = (mode) => {
                 fontSize: 14,
             },
         },
+        components: {
+            MuiInputLabel: {
+                styleOverrides: {
+                    root: {
+                        color: mode === "dark" ? "#aaa" : "#000", // لون الليبل العادي
+                        "&.Mui-focused": {
+                            color: mode === "dark" ? "#f1f1f1" : "#141b2d", // لون الليبل عند التركيز
+                        },
+                    },
+                },
+            },
+            MuiOutlinedInput: {
+                styleOverrides: {
+                    root: {
+                        "& .MuiOutlinedInput-notchedOutline": {
+                            borderColor: mode === "dark" ? "#fff" : "#000", // لون الحدود
+                        },
+                        "&:hover .MuiOutlinedInput-notchedOutline": {
+                            borderColor: mode === "dark" ? "#ccc" : "#666", // لون الحدود عند التحويم
+                        },
+                        "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                            borderColor: mode === "dark" ? "#fff" : "#141b2d", // لون الحدود عند التركيز
+                        },
+                        color: mode === "dark" ? "#fff" : "#000", // لون النص داخل الإدخال
+                    },
+                },
+            },
+        },
     };
 };
+
+
 
 // context for color mode
 export const ColorModeContext = createContext({
