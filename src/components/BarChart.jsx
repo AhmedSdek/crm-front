@@ -271,15 +271,15 @@ const BarChart = ({ isDashboard = false }) => {
           tickRotation: 0,
           legend: "Sales Person",
           legendPosition: "middle",
-          legendOffset: 32,
+          legendOffset: 40,
         }}
         axisLeft={{
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          legend: "Clients",
+          legend: "Leads",
           legendPosition: "middle",
-          legendOffset: -30,
+          legendOffset: -35,
         }}
         enableLabel={false}
         labelSkipWidth={12}

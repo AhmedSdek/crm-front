@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {
     Button,
+    CircularProgress,
     FormControl,
     InputLabel,
     MenuItem,
@@ -34,7 +35,7 @@ const Clients = () => {
         isBuyer: true, // True = شاري, False = بايع
         assignedTo: '', // سيتم تعيين هذه القيمة بناءً على اختيار البائع
     });
-    const handleCreateClient = () => {
+    const handleCreateClient = async () => {
         if (!selectedSeller) {
             Swal.fire({
                 icon: "warning",
@@ -69,7 +70,7 @@ const Clients = () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(clientWithSeller),
         })
-            .then((response) => {
+            .then(async (response) => {
                 if (!response.ok) {
                     return response.json().then(err => {
                         throw new Error(err.message || "Failed to create lead");
@@ -93,7 +94,6 @@ const Clients = () => {
                     isBuyer: true,
                     assignedTo: '',
                 });
-
             Swal.fire({
                 position: "top-end",
                 icon: "success",
@@ -101,7 +101,6 @@ const Clients = () => {
                 showConfirmButton: false,
                 timer: 900
             });
-
             setLoading(false);
         })
             .catch((err) => {
@@ -180,7 +179,9 @@ const Clients = () => {
                     style={{ marginRight: '10px' }}
                 />
                 <TextField
-                    type="date"
+                    type="datetime-local"
+                    label="meeting Date & Time"
+                    InputLabelProps={{ shrink: true }} // ✅ يضمن بقاء الـ label في الأعلى
                     value={newClient.meetingDate}
                     onChange={(e) => setNewClient({ ...newClient, meetingDate: e.target.value })}
                     style={{ marginRight: '10px' }}
@@ -211,7 +212,11 @@ const Clients = () => {
                     </Select>
                 </FormControl>
                 <Button variant="contained" color="primary" disabled={loading} onClick={handleCreateClient} style={{ marginLeft: '10px' }}>
-                    Add Client
+                    {
+                        loading ? <CircularProgress size={20} color="inherit" />
+                            :
+                            "Add Client"
+                    }
                 </Button>
             </Stack>
 

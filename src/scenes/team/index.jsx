@@ -1,4 +1,4 @@
-import { Box, Button, Typography, useTheme } from "@mui/material";
+import { Box, Button, CircularProgress, Typography, useTheme } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { mockDataTeam } from "../../data/mockData";
@@ -9,27 +9,33 @@ import Header from "../../components/Header";
 import { useEffect, useState } from "react";
 import { BASE_URL } from "../../components/constants/baseurl";
 import { useNavigate } from "react-router-dom";
+import { useGetAllUsersQuery } from "../../redux/apiSlice";
 
 const Team = () => {
   // console.log(mockDataTeam)
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [sales, setSales] = useState([]);
-  console.log(sales)
+  const { data: users = [], error: usersError, isLoading: usersLoading } =
+    useGetAllUsersQuery(undefined, {
+      refetchOnMountOrArgChange: true,
+      refetchOnFocus: true,
+    });
+  console.log(users)
   const nav = useNavigate()
-  useEffect(() => {
-    fetchUsers()
-  }, []);
-  const fetchUsers = async () => {
-    try {
-      const response = await fetch(`${BASE_URL}/api/users`);
-      const data = await response.json();
-      // const salesUsers = data.filter(user => user.role === "sales");
-      setSales(data);
-    } catch (error) {
-      console.error('Error fetching users:', error.message);
-    }
-  };
+  // useEffect(() => {
+  //   fetchUsers()
+  // }, []);
+  // const fetchUsers = async () => {
+  //   try {
+  //     const response = await fetch(`${BASE_URL}/api/users`);
+  //     const data = await response.json();
+  //     // const salesUsers = data.filter(user => user.role === "sales");
+  //     setSales(data);
+  //   } catch (error) {
+  //     console.error('Error fetching users:', error.message);
+  //   }
+  // };
   const columns = [
     // { field: "id", headerName: "ID" },
     {
@@ -180,8 +186,13 @@ const Team = () => {
           slots={{
             toolbar: GridToolbar,
           }}
+          loading={usersLoading} // لو البيانات لسه بتحمل، هيظهر "Loading..."
+          localeText={{
+            noRowsLabel: "No Data", // لو مفيش بيانات
+            loadingOverlayLabel: <CircularProgress size={20} color="inherit" />, // أثناء التحميل
+          }}
           components={{ Toolbar: GridToolbar }}
-          checkboxSelection rows={sales} getRowId={(row) => row._id} columns={columns} />
+          checkboxSelection rows={users} getRowId={(row) => row._id} columns={columns} />
       </Box>
     </Box>
   );

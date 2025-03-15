@@ -232,7 +232,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, left, setLeft }) => {
                             setSelected={setSelected}
                         /> */}
 
-                        {/* <Typography
+                        <Typography
                             variant="h6"
                             color={colors.grey[300]}
                             sx={{ m: "15px 0 5px 20px" }}
@@ -245,6 +245,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, left, setLeft }) => {
                             icon={<BarChartOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
+                            setIsCollapsed={setIsCollapsed}
                         />
                         <Item
                             title="Pie Chart"
@@ -252,14 +253,15 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, left, setLeft }) => {
                             icon={<PieChartOutlineOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
+                            setIsCollapsed={setIsCollapsed}
                         />
-                        <Item
+                        {/* <Item
                             title="Line Chart"
                             to="admin-dashboard/line"
                             icon={<TimelineOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
-                        /> */}
+                        />  */}
                         {/* <Item
                             title="Geography Chart"
                             to="admin-dashboard/geography"

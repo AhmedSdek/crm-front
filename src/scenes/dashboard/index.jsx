@@ -16,6 +16,7 @@ import Sidebar from "../global/Sidebar";
 import { useEffect, useState } from "react";
 import { useGetAllClientsQuery, useGetAllUsersQuery, useGetNewLeadsQuery } from "../../redux/apiSlice";
 import { PeopleSharp } from "@mui/icons-material";
+import PieChart from "../../components/PieChart";
 
 
 const Dashboard = () => {
@@ -349,6 +350,22 @@ const Dashboard = () => {
                 Sales
               </Typography>
               <BarChart isDashboard={true} />
+            </Box>
+          </Stack>
+          <Stack>
+            <Box
+              height="400px"
+              backgroundColor={colors.primary[400]}
+              p="10px"
+            >
+              <Typography
+                variant="h5"
+                fontWeight="600"
+                sx={{ padding: "5px 30px" }}
+              >
+                All Leads
+              </Typography>
+              <PieChart isDashboard={true} />
             </Box>
           </Stack>
           {/* <Box

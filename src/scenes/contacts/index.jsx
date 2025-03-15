@@ -154,6 +154,12 @@ const Contacts = () => {
           initialState={{
             pagination: { paginationModel: { pageSize: 10 } } // تحديد العدد الافتراضي للصفوف
           }}
+          // localeText={{ noRowsLabel:  }} 
+          loading={clientsLoading} // لو البيانات لسه بتحمل، هيظهر "Loading..."
+          localeText={{
+            noRowsLabel: "No Data", // لو مفيش بيانات
+            loadingOverlayLabel: <CircularProgress size={20} color="inherit" />, // أثناء التحميل
+          }}
           rows={clients || []}
           getRowId={(row) => row._id} // ✅ تعيين معرف احتياطي عند الحاجة
           columns={columns}
