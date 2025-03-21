@@ -1,9 +1,7 @@
 import { useTheme } from "@mui/material";
 import { ResponsiveChoropleth } from "@nivo/geo";
-// import { geoFeatures } from "../data/mockGeoFeatures";
-import geoFeatures from './eg.json';
+import { geoFeatures } from "../data/mockGeoFeatures";
 import { tokens } from "../theme";
-import egyptGeoJSON from './eg.json';
 console.log(egyptGeoJSON)
 const GeographyChart = () => {
   const theme = useTheme();
