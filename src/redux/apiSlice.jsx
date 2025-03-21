@@ -1,7 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { BASE_URL } from '../components/constants/baseurl';
-// import { logout } from '../redux/authSlice'; // استيراد الأكشن الخاص بتسجيل الخروج
-
 const baseQuery = fetchBaseQuery({
     baseUrl: `${BASE_URL}/api`,
     prepareHeaders: (headers) => {
