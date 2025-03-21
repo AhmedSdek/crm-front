@@ -81,7 +81,7 @@ const Topbar = ({ isCollapsed, setIsCollapsed, left, setLeft }) => {
                 // setOpen(true);
             });
             socket.on('newActionNotification', (data) => {
-                console.log(data)
+                // console.log(data)
                 const { clientId, message, userId, createdAt, _id } = data; // استخراج البيانات من الكائن
                 setNotification((prev) => [
                     ...prev,
@@ -141,9 +141,10 @@ const Topbar = ({ isCollapsed, setIsCollapsed, left, setLeft }) => {
             <Divider />
         </Box>
     );
+
     return (
         <Box sx={{ justifyContent: 'end' }} display="flex" justifyContent="space-between" alignItems='center' p={2}>
-            <IconButton sx={{ display: { sm: 'block', md: 'none' }, lineHeight: '0', marginRight: '10px' }} onClick={() => {
+            <IconButton sx={{ display: user.role === 'admin' ? { sm: 'block', md: 'none' } : "none", lineHeight: '0', marginRight: '10px' }} onClick={() => {
                 setIsCollapsed(!isCollapsed);
             }
             }>

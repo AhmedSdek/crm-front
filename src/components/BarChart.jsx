@@ -147,7 +147,18 @@ const BarChart = ({ isDashboard = false }) => {
   const colors = tokens(theme.palette.mode);
   const [chartData, setChartData] = useState([]);
   const { data: users = [], isLoading: loadingUsers, error: errorUsers } = useGetAllUsersQuery();
+  const [tickRotation, setTickRotation] = useState(0);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setTickRotation(window.innerWidth < 768 ? -30 : 0);
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize(); // استدعاء الوظيفة عند تحميل الصفحة لأول مرة
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   useEffect(() => {
     if (users.length > 0) {
       const salesUsers = users.filter(user => user.role === "sales");
@@ -193,7 +204,8 @@ const BarChart = ({ isDashboard = false }) => {
   }, [users]);
 
   return (
-    <div style={{ width: "100%", height: "400px" }}>
+    <div style={{ width: "100%", height: "400px", overflowX: 'auto', overflowY: 'clip' }}>
+      <div style={{ minWidth: '600px', height: "100%" }}>
       <ResponsiveBar
         data={chartData}
         keys={chartData.length > 0 ? Object.keys(chartData[0]).filter(key => key !== "salesName") : []}
@@ -234,7 +246,12 @@ const BarChart = ({ isDashboard = false }) => {
             },
           },
         }}
-        margin={{ top: 50, right: 100, bottom: 50, left: 40 }}
+          margin={{
+            top: 50,
+            right: 100,
+            bottom: window.innerWidth < 768 ? 80 : 50, // زيادة المسافة أسفل المحور السفلي
+            left: 40,
+          }}
         padding={0.3}
         valueScale={{ type: "linear" }}
         indexScale={{ type: "band", round: true }}
@@ -268,10 +285,11 @@ const BarChart = ({ isDashboard = false }) => {
         axisBottom={{
           tickSize: 5,
           tickPadding: 5,
-          tickRotation: 0,
+          tickRotation: tickRotation,
+          // tickRotation: window.innerWidth < 768 ? -60 : 0, // تدوير النص على الشاشات الصغيرة
           legend: "Sales Person",
           legendPosition: "middle",
-          legendOffset: 40,
+          legendOffset: window.innerWidth < 768 ? 50 : 40, // تعديل موضع التسمية
         }}
         axisLeft={{
           tickSize: 5,
@@ -313,7 +331,9 @@ const BarChart = ({ isDashboard = false }) => {
           },
         ]}
       />
+      </div>  {/* ضمان وجود عرض كافٍ */}
     </div>
+
   );
 };
 

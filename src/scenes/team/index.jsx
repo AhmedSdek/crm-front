@@ -1,13 +1,10 @@
 import { Box, Button, CircularProgress, Typography, useTheme } from "@mui/material";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
-import { mockDataTeam } from "../../data/mockData";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import LockOpenOutlinedIcon from "@mui/icons-material/LockOpenOutlined";
 import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
-import { useEffect, useState } from "react";
-import { BASE_URL } from "../../components/constants/baseurl";
 import { useNavigate } from "react-router-dom";
 import { useGetAllUsersQuery } from "../../redux/apiSlice";
 
@@ -15,27 +12,14 @@ const Team = () => {
   // console.log(mockDataTeam)
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [sales, setSales] = useState([]);
   const { data: users = [], error: usersError, isLoading: usersLoading } =
     useGetAllUsersQuery(undefined, {
       refetchOnMountOrArgChange: true,
       refetchOnFocus: true,
     });
-  console.log(users)
+  // console.log(users)
   const nav = useNavigate()
-  // useEffect(() => {
-  //   fetchUsers()
-  // }, []);
-  // const fetchUsers = async () => {
-  //   try {
-  //     const response = await fetch(`${BASE_URL}/api/users`);
-  //     const data = await response.json();
-  //     // const salesUsers = data.filter(user => user.role === "sales");
-  //     setSales(data);
-  //   } catch (error) {
-  //     console.error('Error fetching users:', error.message);
-  //   }
-  // };
+
   const columns = [
     // { field: "id", headerName: "ID" },
     {
@@ -123,6 +107,7 @@ const Team = () => {
                 borderRadius: "5px",
                 padding: "5px 10px",
                 cursor: "pointer",
+                display: row.role === "admin" && "none"
               }}
             >
               View

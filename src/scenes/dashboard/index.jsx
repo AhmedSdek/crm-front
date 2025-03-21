@@ -24,6 +24,7 @@ const Dashboard = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [salse, setSalse] = useState([]);
+
   const { data: clients = [], error: clientsError, isLoading: clientsLoading } =
     useGetAllClientsQuery(undefined, {
       refetchOnMountOrArgChange: true, // تحديث البيانات عند تحميل المكون
@@ -56,7 +57,15 @@ const Dashboard = () => {
     }
   }, [newLeadsData, users]);
 
+  const contractedSales = salse
+    .map(sale => ({
+      ...sale,
+      contractedCount: sale.assignedClients.filter(client => client.status === "Contracted").length
+    }))
+    .filter(sale => sale.contractedCount > 0) // فلترة السيلز اللي عندهم عقود فقط
+    .sort((a, b) => b.contractedCount - a.contractedCount); // ترتيب تنازلي
 
+  console.log(contractedSales)
   return (
     <Container>
       <Box >
@@ -253,7 +262,13 @@ const Dashboard = () => {
               <LineChart isDashboard={true} />
             </Box>
           </Box> */}
-          <Box
+
+
+
+
+
+
+          {/* <Box
             gridColumn="span 4"
             gridRow="span 2"
             backgroundColor={colors.primary[400]}
@@ -288,7 +303,6 @@ const Dashboard = () => {
                     {sale.name}
                   </Typography>
                 </Box>
-                {/* <Box color={colors.grey[100]}>{transaction.date}</Box> */}
                 <Box
                   backgroundColor={colors.greenAccent[500]}
                   p="5px 10px"
@@ -303,7 +317,73 @@ const Dashboard = () => {
                 Loading
               </Typography>
             }
+          </Box> */}
+          {
+            contractedSales.length > 0 &&
+            <Box
+              gridColumn="span 4"
+              gridRow="span 2"
+              backgroundColor={colors.primary[400]}
+              overflow="auto"
+            >
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+                borderBottom={`4px solid ${colors.primary[500]}`}
+                colors={colors.grey[100]}
+                p="15px"
+              >
+                <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
+                  Top Achievers
+                </Typography>
+                <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
+                  Contracted Leads
+                </Typography>
+              </Box>
+              {/* {salse
+              .map(sale => ({
+                ...sale,
+                contractedCount: sale.assignedClients.filter(client => client.status === "Contracted").length
+              }))} */}
+              {!usersLoading ? (
+                salse
+                  .map(sale => ({
+                    ...sale,
+                    contractedCount: sale.assignedClients.filter(client => client.status === "Contracted").length
+                  }))
+                  .filter(sale => sale.contractedCount > 0) // فلترة السيلز اللي عندهم عقود فقط
+                  .sort((a, b) => b.contractedCount - a.contractedCount) // ترتيب تنازلي بناءً على العقود
+                  .map((sale, i) => (
+                    <Box
+                      key={i}
+                      display="flex"
+                      justifyContent="space-between"
+                      alignItems="center"
+                      borderBottom={`4px solid ${colors.primary[500]}`}
+                      p="15px"
+                    >
+                      <Box>
+                        <Typography color={colors.grey[100]}>
+                          {sale.name}
+                        </Typography>
+                      </Box>
+                      <Box
+                        backgroundColor={colors.greenAccent[500]}
+                        p="5px 10px"
+                        borderRadius="4px"
+                      >
+                        {sale.contractedCount}
+                      </Box>
+                    </Box>
+                  ))
+              ) : (
+                <Typography>Loading</Typography>
+              )}
           </Box>
+          }
+
+
 
           {/* ROW 3 */}
           <Stack>
@@ -331,9 +411,11 @@ const Dashboard = () => {
                 <Typography>Includes extra misc expenditures and costs</Typography>
               </Box>
             </Box> */}
+
             <Box
               backgroundColor={colors.primary[400]}
               p="10px"
+              // sx={{ display: { xs: 'none', md: 'block' } }}
             >
               <Typography
                 variant="h5"

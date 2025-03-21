@@ -18,7 +18,7 @@ function SaleDetails() {
             setClients(user.assignedClients)
         }
     }, [user]);
-    console.log(clients)
+    // console.log(clients)
     const columns = [
         // { field: "id", headerName: "ID" },
         {
@@ -60,6 +60,7 @@ function SaleDetails() {
             },
         },
         {
+            field: 'action',
             headerName: "Action",
             flex: 1,
             renderCell: ({ row }) => {
@@ -144,6 +145,7 @@ function SaleDetails() {
                     slots={{
                         toolbar: GridToolbar,
                     }}
+                    rowCount={clients?.length || 0} // ✅ تحديد عدد الصفوف لتجنب الخطأ
                     components={{ Toolbar: GridToolbar }}
                     checkboxSelection rows={clients} getRowId={(row) => row._id} columns={columns} />
             </Box>

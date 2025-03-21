@@ -16,7 +16,7 @@ function AllLeads() {
     const nav = useNavigate();
     const colors = tokens(theme.palette.mode);
     const { data: clients, error, loading } = useGetClientsBySellerQuery(sellerId);
-    console.log(clients)
+    // console.log(clients)
     useEffect(() => {
         if (sellerId) {
             dispatch(fetchClientsForSeller(sellerId));
