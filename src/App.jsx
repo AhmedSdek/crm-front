@@ -26,11 +26,13 @@ import Invoices from './scenes/invoices/index.jsx';
 import Form from './scenes/form/index.jsx';
 import Bar from './scenes/bar/index.jsx';
 import Pie from './scenes/pie/index.jsx';
+import Geography from './scenes/geography/index.jsx';
 import Line from './scenes/line/index.jsx';
 import FAQ from './scenes/faq/index.jsx';
 import Calendar from './scenes/calendar/calendar.jsx';
 import { jwtDecode } from 'jwt-decode';
 import socket from './components/constants/soket.jsx';
+import GeographyChart from './components/GeographyChart.jsx'
 function App() {
   const [theme, colorMode] = useMode();
   const [user, setUser] = useState(null);
@@ -66,7 +68,7 @@ function App() {
     // يمكن وضع شاشة تحميل هنا
     return <div>Loading...</div>;
   }
-
+  const adminStyles = user?.role === 'admin' ? { marginLeft: { xs: '0', md: '80px' } } : {};
   return (
     <>
       <ColorModeContext.Provider value={colorMode}>
@@ -74,7 +76,7 @@ function App() {
           <CssBaseline />
           <Stack sx={{ width: '100%', position: 'relative' }} >
             {user?.role === 'admin' && <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} left={left} setLeft={setLeft} />}
-            <Stack sx={{ marginLeft: { xs: '0', md: '80px' } }}>
+            <Stack sx={adminStyles}>
               <Topbar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} left={left} setLeft={setLeft} />
               <ToastContainer />
               <Routes>
@@ -93,6 +95,7 @@ function App() {
                   <Route path="form" element={<Form />} />
                   <Route path="bar" element={<Bar />} />
                   <Route path="pie" element={<Pie />} />
+                  <Route path="geography" element={<Geography />} />
                   <Route path="line" element={<Line />} />
                   <Route path="faq" element={<FAQ />} />
                   <Route path="calendar" element={<Calendar />} />

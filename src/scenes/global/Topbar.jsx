@@ -165,7 +165,7 @@ const Topbar = ({ isCollapsed, setIsCollapsed, left, setLeft }) => {
                 variant="h5"
                 noWrap
                 component="a"
-                href={user && user.role === 'admin' ? '/admin-dashboard' : '/allleads'}
+                href={user ? (user.role === 'admin' ? '/admin-dashboard' : '/allleads') : ("/login")}
                 sx={{
                     mr: 2,
                     display: "flex",

@@ -268,6 +268,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, left, setLeft }) => {
                             icon={<MapOutlinedIcon />}
                             selected={selected}
                             setSelected={setSelected}
+                            setIsCollapsed={setIsCollapsed}
                         /> */}
                     </Box>
                 </Menu>

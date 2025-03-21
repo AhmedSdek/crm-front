@@ -1,13 +1,21 @@
 import { useTheme } from "@mui/material";
 import { ResponsiveChoropleth } from "@nivo/geo";
-import { geoFeatures } from "../data/mockGeoFeatures";
+// import { geoFeatures } from "../data/mockGeoFeatures";
+import geoFeatures from './eg.json';
 import { tokens } from "../theme";
-import { mockGeographyData as data } from "../data/mockData";
-
-const GeographyChart = ({ isDashboard = false }) => {
+import egyptGeoJSON from './eg.json';
+console.log(egyptGeoJSON)
+const GeographyChart = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  return (
+  const data = [
+    { name: "Al Qahirah", value: 120 }, // عدد العملاء لكل محافظة
+    { id: "Alexandria", value: 80 },
+    { id: "Giza", value: 95 },
+    { id: "Aswan", value: 40 },
+    { id: "Suez", value: 55 },
+  ];
+  return ( 
     <ResponsiveChoropleth
       data={data}
       theme={{
@@ -44,14 +52,15 @@ const GeographyChart = ({ isDashboard = false }) => {
       unknownColor="#666666"
       label="properties.name"
       valueFormat=".2s"
-      projectionScale={isDashboard ? 40 : 150}
-      projectionTranslation={isDashboard ? [0.49, 0.6] : [0.5, 0.5]}
+      projectionScale={2500} // تكبير الخريطة
+      // projectionTranslation={[0.9, 1.4]} // توسيط الخريطة
+      // projectionScale={150}
+      projectionTranslation={[-0.6, 3]}
       projectionRotation={[0, 0, 0]}
       borderWidth={1.5}
       borderColor="#ffffff"
       legends={
-        !isDashboard
-          ? [
+        [
               {
                 anchor: "bottom-left",
                 direction: "column",
@@ -75,11 +84,65 @@ const GeographyChart = ({ isDashboard = false }) => {
                   },
                 ],
               },
-            ]
-          : undefined
+        ]
       }
     />
   );
 };
 
 export default GeographyChart;
+
+// const EgyptMap = () => {
+//   const theme = useTheme();
+//   const colors = tokens(theme.palette.mode);
+
+//   const data = [
+//     { name: "Al Qahirah", value: 120 }, // عدد العملاء لكل محافظة
+//     // { id: "Alexandria", value: 80 },
+//     // { id: "Giza", value: 95 },
+//     // { id: "Aswan", value: 40 },
+//     // { id: "Suez", value: 55 },
+//   ];
+
+//   return (
+//     <ResponsiveChoropleth
+//       data={data}
+//       theme={{
+//         axis: {
+//           domain: { line: { stroke: colors.grey[100] } },
+//           legend: { text: { fill: colors.grey[100] } },
+//           ticks: { line: { stroke: colors.grey[100], strokeWidth: 1 }, text: { fill: colors.grey[100] } },
+//         },
+//         legends: { text: { fill: colors.grey[100] } },
+//       }}
+//       features={egyptGeoJSON.features} // ملف خريطة مصر
+//       margin={{ top: 20, right: 20, bottom: 40, left: 20 }}
+//       colors="YlOrRd" // تدرجات لونية
+//       domain={[0, Math.max(...data.map((d) => d.value), 1)]}
+//       unknownColor="#666666"
+//       label="properties.name" // تسمية المحافظات
+//       valueFormat=".2s"
+//       projectionScale={1000} // تكبير الخريطة لتناسب العرض
+//       projectionTranslation={[0.5, 0.7]} // توسيط الخريطة
+//       borderWidth={1.2}
+//       borderColor="#ffffff"
+//       legends={[
+//         {
+//           anchor: "bottom-left",
+//           direction: "column",
+//           translateX: 20,
+//           translateY: -40,
+//           itemWidth: 94,
+//           itemHeight: 18,
+//           itemDirection: "left-to-right",
+//           itemTextColor: colors.grey[100],
+//           symbolSize: 18,
+//           symbolShape: "circle",
+//           effects: [{ on: "hover", style: { itemTextColor: "#ffffff", itemOpacity: 1 } }],
+//         },
+//       ]}
+//     />
+//   );
+// };
+
+// export default EgyptMap;

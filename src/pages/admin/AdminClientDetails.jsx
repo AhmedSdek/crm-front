@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Button, CircularProgress, Container, Divider, FormControl, IconButton, InputLabel, MenuItem, Paper, Select, Stack, TextField, Typography } from '@mui/material';
 import { LocalPhone, WhatsApp } from '@mui/icons-material';
-import { useGetAllUsersQuery, useGetAllClientsQuery, useUpdateClientMutation } from '../../redux/apiSlice';
+import { useGetAllUsersQuery, useGetAllClientsQuery, useUpdateClientMutation, useGetClientByIdQuery } from '../../redux/apiSlice';
 import Swal from 'sweetalert2';
 import moment from 'moment';
 import { jwtDecode } from 'jwt-decode';
@@ -11,9 +11,7 @@ function AdminClientDetails() {
     const { id } = useParams();
     const token = localStorage.getItem('token');
     const currentuser = jwtDecode(token);
-    // console.log(currentuser)
-
-    const { data: client, isFetching } = useGetAllClientsQuery(); // جلب بيانات العميل
+    const { data: client, isFetching } = useGetClientByIdQuery(id); // جلب بيانات العميل
     const { data: users } = useGetAllUsersQuery(); // جلب بيانات المستخدمين
     // console.log(users)
     const [updateClient] = useUpdateClientMutation(); // تعديل العميل
@@ -21,62 +19,12 @@ function AdminClientDetails() {
     const [originalData, setOriginalData] = useState({});
     // console.log(editedData)
     const currentUserId = localStorage.getItem('sellerId');
-
-
     useEffect(() => {
         if (client) {
-            const currentClient = client.find((c) => c._id === id); // العثور على العميل الحالي
-            setEditedData(currentClient || {});
-            setOriginalData(currentClient || {}); // حفظ البيانات الأصلية عند تحميل العميل
+            setEditedData(client || {});
+            setOriginalData(client || {}); // حفظ البيانات الأصلية عند تحميل العميل
         }
     }, [client, id]);
-
-    // const handleInputChange = (e) => {
-    //     const { name, value } = e.target;
-    //     if (name === 'assignedTo') {
-    //         setEditedData({ ...editedData, assignedTo: { _id: value } });
-    //     } else {
-    //         setEditedData({ ...editedData, [name]: value });
-    //     }
-    // };
-
-    // const handleUpdate = async () => {
-    //     try {
-    //         // تحديد الحقول المعدلة فقط
-    //         const changes = {};
-    //         console.log(changes)
-    //         for (let key in editedData) {
-    //             if (editedData[key] !== originalData[key]) {
-    //                 changes[key] = editedData[key];
-    //             }
-    //         }
-
-    //         if (Object.keys(changes).length > 0) {
-    //             await updateClient({ id, updates: changes }).unwrap(); // إرسال التحديثات فقط
-    //             // alert('Client updated successfully');
-    //             Swal.fire({
-    //                 position: "top-end",
-    //                 icon: "success",
-    //                 title: "Client updated successfully",
-    //                 showConfirmButton: false,
-    //                 timer: 900
-    //             });
-    //         } else {
-    //             Swal.fire({
-    //                 icon: "info",
-    //                 title: "No changes",
-    //                 text: "No changes were made to the client data.",
-    //             });
-    //         }
-    //     } catch (error) {
-    //         console.error('Failed to update client:', error);
-    //         Swal.fire({
-    //             icon: "error",
-    //             title: "Oops...",
-    //             text: "Failed to update client",
-    //         });
-    //     }
-    // };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -99,6 +47,8 @@ function AdminClientDetails() {
             }
             if (Object.keys(changes).length > 0) {
                 await updateClient({ id, updates: changes }).unwrap();
+                // ✅ تحديث originalData بعد التحديث الناجح
+                setOriginalData(editedData);
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -157,7 +107,10 @@ function AdminClientDetails() {
                     </Stack>
                 </Stack>
                 <Divider sx={{ margin: '20px 0' }} />
-                <Stack spacing={2}>
+                <Stack component='form' onSubmit={(e) => {
+                    e.preventDefault()
+                    handleUpdate()
+                }} spacing={2}>
                     <TextField
                         label="First Name"
                         name="firstName"
@@ -294,8 +247,8 @@ function AdminClientDetails() {
                         value={moment(editedData.modifiedTime).format("YYYY-MM-DD HH:mm:ss")}
                         disabled
                     />
-                    <Button variant="contained" color="primary" onClick={handleUpdate}>
-                        Update Client
+                    <Button variant="contained" color="primary" type='submit'>
+                        Update Lead
                     </Button>
                 </Stack>
             </Stack>

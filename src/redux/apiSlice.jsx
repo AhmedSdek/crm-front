@@ -132,6 +132,9 @@ export const apiSlice = createApi({
             query: () => '/clients/',
             providesTags: ['Clients'],
         }),
+        getClientById: builder.query({
+            query: (id) => `/clients/${id}`,
+        }),
         createClient: builder.mutation({
             query: (newClient) => ({
                 url: '/clients/',
@@ -178,6 +181,7 @@ export const {
     useGetAllClientsQuery,
     useCreateClientMutation,
     useAssignClientToSellerMutation,
+    useGetClientByIdQuery,
     useAddFeedbackToClientMutation,
     useUpdateClientMutation,
     useDeleteClientMutation,

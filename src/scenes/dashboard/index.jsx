@@ -284,13 +284,6 @@ const Dashboard = () => {
                 p="15px"
               >
                 <Box>
-                  {/* <Typography
-                    color={colors.greenAccent[500]}
-                    variant="h5"
-                    fontWeight="600"
-                  >
-                    {transaction.txId}
-                  </Typography> */}
                   <Typography color={colors.grey[100]}>
                     {sale.name}
                   </Typography>
@@ -365,7 +358,7 @@ const Dashboard = () => {
               >
                 All Leads
               </Typography>
-              <PieChart isDashboard={true} />
+              <PieChart />
             </Box>
           </Stack>
           {/* <Box
@@ -381,8 +374,8 @@ const Dashboard = () => {
           >
             Geography Based Traffic
           </Typography>
-          <Box height="200px">
-            <GeographyChart isDashboard={true} />
+            <Box height="400px">
+              <GeographyChart />
           </Box>
           </Box> */}
         </Stack>
