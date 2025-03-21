@@ -2,7 +2,6 @@ import { useTheme } from "@mui/material";
 import { ResponsiveChoropleth } from "@nivo/geo";
 import { geoFeatures } from "../data/mockGeoFeatures";
 import { tokens } from "../theme";
-console.log(egyptGeoJSON)
 const GeographyChart = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -10,7 +9,7 @@ const GeographyChart = () => {
     { name: "Al Qahirah", value: 120 }, // عدد العملاء لكل محافظة
     { id: "Alexandria", value: 80 },
     { id: "Giza", value: 95 },
-    { id: "Aswan", value: 40 },
+    { id: "Aswan", value: 40 }, 
     { id: "Suez", value: 55 },
   ];
   return ( 

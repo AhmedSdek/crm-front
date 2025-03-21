@@ -13,7 +13,6 @@ function AdminClientDetails() {
     const currentuser = jwtDecode(token);
     const { data: client, isFetching } = useGetClientByIdQuery(id); // جلب بيانات العميل
     const { data: users } = useGetAllUsersQuery(); // جلب بيانات المستخدمين
-    // console.log(users)
     const [updateClient] = useUpdateClientMutation(); // تعديل العميل
     const [editedData, setEditedData] = useState({});
     const [originalData, setOriginalData] = useState({});
