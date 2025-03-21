@@ -68,6 +68,7 @@ const Contacts = () => {
       ),
     },
     {
+      field: 'action',
       headerName: "Action",
       flex: 1,
       minWidth: 250,
@@ -160,6 +161,7 @@ const Contacts = () => {
             noRowsLabel: "No Data", // لو مفيش بيانات
             loadingOverlayLabel: <CircularProgress size={20} color="inherit" />, // أثناء التحميل
           }}
+          rowCount={clients?.length || 0} // ✅ تحديد عدد الصفوف لتجنب الخطأ
           rows={clients || []}
           getRowId={(row) => row._id} // ✅ تعيين معرف احتياطي عند الحاجة
           columns={columns}

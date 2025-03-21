@@ -103,6 +103,7 @@ const Team = () => {
       },
     },
     {
+      field: 'action',
       headerName: "Action",
       flex: 1,
       renderCell: ({ row }) => {
@@ -191,6 +192,7 @@ const Team = () => {
             noRowsLabel: "No Data", // لو مفيش بيانات
             loadingOverlayLabel: <CircularProgress size={20} color="inherit" />, // أثناء التحميل
           }}
+          rowCount={users?.length || 0} // ✅ تحديد عدد الصفوف لتجنب الخطأ
           components={{ Toolbar: GridToolbar }}
           checkboxSelection rows={users} getRowId={(row) => row._id} columns={columns} />
       </Box>

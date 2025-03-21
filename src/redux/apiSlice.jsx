@@ -50,6 +50,10 @@ export const apiSlice = createApi({
             query: () => '/clients/',
             providesTags: ['Clients'],
         }),
+        getClientsBySeller: builder.query({
+            query: (sellerId) => `/clients/seller/${sellerId}`,
+            providesTags: ['Clients'],
+        }),
         getClientById: builder.query({
             query: (id) => `/clients/${id}`,
         }),
@@ -97,6 +101,7 @@ export const apiSlice = createApi({
 
 export const {
     useGetAllClientsQuery,
+    useGetClientsBySellerQuery,
     useCreateClientMutation,
     useAssignClientToSellerMutation,
     useGetClientByIdQuery,

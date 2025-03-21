@@ -6,7 +6,7 @@ export const fetchClientsForSeller = createAsyncThunk(
     'sellerClients/fetchClientsForSeller',
     async (sellerId, thunkAPI) => {
         try {
-            const response = await axios.get(`${BASE_URL}/api/clients/${sellerId}`);
+            const response = await axios.get(`${BASE_URL}/api/clients/seller/${sellerId}`);
             // console.log(response.data)
             return response.data;
         } catch (error) {
