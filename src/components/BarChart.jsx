@@ -291,7 +291,7 @@ const BarChart = ({ isDashboard = false }) => {
           legendPosition: "middle",
           legendOffset: window.innerWidth < 768 ? 50 : 40, // تعديل موضع التسمية
         }}
-      axisLeft={{
+        /*   axisLeft={{
          tickSize: 5,
          tickPadding: 5,
          tickRotation: 0,
@@ -299,8 +299,17 @@ const BarChart = ({ isDashboard = false }) => {
           legendPosition: "middle",
           legendOffset: -35,
         format: value => Math.floor(value), // عرض الأرقام كأعداد صحيحة
-       }}
-
+       }}*/
+axisLeft={{
+  tickSize: 5,
+  tickPadding: 5,
+  tickRotation: 0,
+  legend: "Leads",
+  legendPosition: "middle",
+  legendOffset: -35,
+  tickValues: Array.from({ length: Math.max(...chartData.map(item => 
+    Object.values(item).filter(v => typeof v === "number")).flat()) + 1 }, (_, i) => i),
+}}
         enableLabel={false}
         labelSkipWidth={12}
         labelSkipHeight={12}
