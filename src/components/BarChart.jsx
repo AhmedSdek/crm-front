@@ -291,14 +291,23 @@ const BarChart = ({ isDashboard = false }) => {
           legendPosition: "middle",
           legendOffset: window.innerWidth < 768 ? 50 : 40, // تعديل موضع التسمية
         }}
+     //  axisLeft={{
+      //    tickSize: 5,
+      //    tickPadding: 5,
+      //    tickRotation: 0,
+      //    legend: "Leads",
+      //    legendPosition: "middle",
+      //    legendOffset: -35,
+    //    }}
         axisLeft={{
-          tickSize: 5,
-          tickPadding: 5,
-          tickRotation: 0,
-          legend: "Leads",
-          legendPosition: "middle",
-          legendOffset: -35,
-        }}
+  tickSize: 5,
+  tickPadding: 5,
+  tickRotation: 0,
+  legend: "Leads",
+  legendPosition: "middle",
+  legendOffset: -35,
+  tickValues: Array.from({ length: Math.ceil(Math.max(...chartData.map(item => Object.values(item).filter(val => typeof val === 'number')))) + 1 }, (_, i) => i),
+}}
         enableLabel={false}
         labelSkipWidth={12}
         labelSkipHeight={12}
