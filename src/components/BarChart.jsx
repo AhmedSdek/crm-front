@@ -300,7 +300,7 @@ const BarChart = ({ isDashboard = false }) => {
           legendOffset: -35,
         format: value => Math.floor(value), // عرض الأرقام كأعداد صحيحة
        }}*/
-axisLeft={{
+/*axisLeft={{
   tickSize: 5,
   tickPadding: 5,
   tickRotation: 0,
@@ -309,6 +309,25 @@ axisLeft={{
   legendOffset: -35,
   tickValues: Array.from({ length: Math.max(...chartData.map(item => 
     Object.values(item).filter(v => typeof v === "number")).flat()) + 2 }, (_, i) => i),
+}}*/
+        axisLeft={{
+  tickSize: 5,
+  tickPadding: 5,
+  tickRotation: 0,
+  legend: "Leads",
+  legendPosition: "middle",
+  legendOffset: -35,
+  tickValues: chartData.length > 0
+    ? Array.from(
+        { length: Math.max(5, Math.ceil(Math.max(...chartData.map(item => {
+          // استخراج القيم بدون "salesName"
+          return Object.keys(item)
+            .filter(key => key !== "salesName")
+            .map(key => item[key]);
+        }).flat()))) + 1) },
+        (_, i) => i
+      )
+    : [0, 1, 2, 3, 4, 5], // القيم الافتراضية في حالة عدم وجود بيانات
 }}
         enableLabel={false}
         labelSkipWidth={12}
