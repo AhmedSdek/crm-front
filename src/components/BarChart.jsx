@@ -175,11 +175,13 @@ axisLeft={{
     Object.values(item).filter(v => typeof v === "number")).flat()) + 2 }, (_, i) => i),
 }}
   gridYValues={Array.from(
-    { length: Math.max(1, Math.ceil(Math.max(...chartData.map(item => {
-      return Object.keys(item).filter(key => key !== "salesName").map(key => item[key]);
-    }).flat())) + 1 },
-    (_, i) => i
-  )} // تحديد الخطوط الخلفية الأفقية
+  { length: Math.max(5, Math.ceil(Math.max(...chartData.map(item => {
+    return Object.keys(item)
+      .filter(key => key !== "salesName")
+      .map(key => item[key]);
+  }).flat())) + 1) },
+  (_, i) => i
+)}
         enableLabel={false}
         labelSkipWidth={12}
         labelSkipHeight={12}
