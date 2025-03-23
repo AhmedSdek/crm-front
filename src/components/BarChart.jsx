@@ -299,14 +299,20 @@ const BarChart = ({ isDashboard = false }) => {
       //    legendPosition: "middle",
       //    legendOffset: -35,
     //    }}
-        axisLeft={{
+      axisLeft={{
   tickSize: 5,
   tickPadding: 5,
   tickRotation: 0,
   legend: "Leads",
   legendPosition: "middle",
   legendOffset: -35,
-  tickValues: Array.from({ length: Math.ceil(Math.max(...chartData.map(item => Object.values(item).filter(val => typeof val === 'number')))) + 1 }, (_, i) => i),
+  tickValues: Array.from(
+    { length: Math.max(5, Math.ceil(Math.max(...chartData.map(item => {
+      // استخراج الأعداد من المفاتيح باستثناء salesName
+      return Object.keys(item).filter(key => key !== "salesName").map(key => item[key]);
+    }).flat()))) + 1) },
+    (_, i) => i
+  ),
 }}
         enableLabel={false}
         labelSkipWidth={12}
