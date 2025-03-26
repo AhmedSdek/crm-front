@@ -13,11 +13,12 @@ function AdminClientDetails() {
     const currentuser = jwtDecode(token);
     const { data: client, isFetching } = useGetClientByIdQuery(id); // جلب بيانات العميل
     const { data: users } = useGetAllUsersQuery(); // جلب بيانات المستخدمين
+    // console.log(users)
     const [updateClient] = useUpdateClientMutation(); // تعديل العميل
     const [editedData, setEditedData] = useState({});
     const [originalData, setOriginalData] = useState({});
     // console.log(editedData)
-    const currentUserId = localStorage.getItem('sellerId');
+    // const currentUserId = localStorage.getItem('sellerId');
     useEffect(() => {
         if (client) {
             setEditedData(client || {});
@@ -226,7 +227,7 @@ function AdminClientDetails() {
                             onChange={handleInputChange}
                         >
                             {users && users
-                                .filter((seller) => seller._id !== currentUserId)
+                                .filter((seller) => seller.role === "sales")
                                 .map((seller) => (
                                     <MenuItem key={seller._id} value={seller._id}>
                                         {seller.name}

@@ -64,8 +64,6 @@ const Dashboard = () => {
     }))
     .filter(sale => sale.contractedCount > 0) // فلترة السيلز اللي عندهم عقود فقط
     .sort((a, b) => b.contractedCount - a.contractedCount); // ترتيب تنازلي
-
-  console.log(contractedSales)
   return (
     <Container>
       <Box >
@@ -94,12 +92,39 @@ const Dashboard = () => {
         >
           {/* ROW 1 */}
           <Stack sx={{
-            flexDirection: { xs: 'column', md: 'row' },
+            flexDirection: { xs: 'column', lg: 'row' },
             width: '100%',
             gap: 3, // المسافة بين البوكسات
             justifyContent: 'space-between', // توزيع العناصر بالتساوي
             alignItems: 'center', // حواف داخلية للمكدس
           }}>
+            <Box
+              sx={{
+                backgroundColor: colors.primary[400],
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flex: 1,
+                width: '100%',
+                minWidth: '250px', // الحد الأدنى لعرض البوكس
+                height: '150px',
+                borderRadius: '12px', // زوايا دائرية
+                boxShadow: '0 4px 12px rgba(0, 0, 0, 0.2)', // إضافة ظل
+                p: 2,
+              }}
+            >
+              <StatBox
+                title={users ? users.length : 0}
+                subtitle="Users"
+                progress={`0.${users && users.length}`}
+                // increase="+14%"
+                icon={
+                  <PeopleSharp
+                    sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                  />
+                }
+              />
+            </Box>
             <Box
               sx={{
                 backgroundColor: colors.primary[400],

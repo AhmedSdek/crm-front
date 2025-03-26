@@ -166,7 +166,7 @@ const Topbar = ({ isCollapsed, setIsCollapsed, left, setLeft }) => {
                 variant="h5"
                 noWrap
                 component="a"
-                href={user ? (user.role === 'admin' ? '/admin-dashboard' : '/allleads') : ("/login")}
+                href={user ? (user.role === 'admin' ? '/admin-dashboard' : '/sales') : ("/login")}
                 sx={{
                     mr: 2,
                     display: "flex",
@@ -252,12 +252,12 @@ const Topbar = ({ isCollapsed, setIsCollapsed, left, setLeft }) => {
                                     :
                                     user.role === 'sales' &&
                                     <>
-                                        <Link to='/allleads'>
+                                        <Link to='/sales'>
                                             <MenuItem onClick={handleCloseUserMenu}>
                                                 All Leads
                                             </MenuItem>
                                         </Link>
-                                        <Link to='/add-lead'>
+                                        <Link to='/sales/add-lead'>
                                             <MenuItem onClick={handleCloseUserMenu}>
                                                 Add Lead
                                             </MenuItem>

@@ -17,7 +17,7 @@ import { useGetAllUsersQuery } from '../redux/apiSlice';
 const Clients = () => {
     // const [users, setUsers] = useState([]);
     const { data: users = [] } = useGetAllUsersQuery(); // جلب بيانات المستخدمين
-    const currentUserId = localStorage.getItem('sellerId');
+    // const currentUserId = localStorage.getItem('sellerId');
     const [loading, setLoading] = useState(null);
     const [selectedSeller, setSelectedSeller] = useState('');
     const [newClient, setNewClient] = useState({
@@ -203,7 +203,7 @@ const Clients = () => {
                         onChange={(e) => setSelectedSeller(e.target.value)}
                     >
                         {users
-                            .filter((seller) => seller._id !== currentUserId)
+                            .filter((seller) => seller.role === "sales")
                             .map((seller) => (
                                 <MenuItem key={seller._id} value={seller._id}>
                                     {seller.name}

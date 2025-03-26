@@ -63,7 +63,7 @@ function AllLeads() {
                     }}
                 >
                     <Button
-                        onClick={() => nav(`/allleads/${row._id}`)}
+                        onClick={() => nav(`/sales/${row._id}`)}
                         sx={{
                             backgroundColor: colors.blueAccent[500],
                             color: colors.grey[100],

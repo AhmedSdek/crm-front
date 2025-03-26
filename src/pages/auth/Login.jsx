@@ -114,7 +114,7 @@ const LoginPage = () => {
                 // ✅ نجاح تسجيل الدخول - تخزين البيانات وإعادة التوجيه
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('sellerId', jwtDecode(data.token).id);
-                navigate(data.role === 'admin' ? '/admin-dashboard' : '/allleads');
+                navigate(data.role === 'admin' ? '/admin-dashboard' : '/sales');
             } else {
                 // ❌ فشل تسجيل الدخول
                 setError(data.error || 'Invalid email or password.');

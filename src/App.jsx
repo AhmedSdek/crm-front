@@ -33,6 +33,7 @@ import Calendar from './scenes/calendar/calendar.jsx';
 import { jwtDecode } from 'jwt-decode';
 import socket from './components/constants/soket.jsx';
 import GeographyChart from './components/GeographyChart.jsx'
+import HrHome from './pages/sales/HrHome.jsx'
 function App() {
   const [theme, colorMode] = useMode();
   const [user, setUser] = useState(null);
@@ -80,6 +81,11 @@ function App() {
               <Topbar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} left={left} setLeft={setLeft} />
               <ToastContainer />
               <Routes>
+                <Route path="/signup" element={<SignUpPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="*" element={'not found'} />
+                <Route path='/' element={<Home />} />
+
                 <Route path="/admin-dashboard" element={<PrivateRoute requiredRole="admin" />}>
                   <Route index element={<Dashboard />} /> 
                   <Route path="clients" element={<Clients />} />
@@ -100,15 +106,16 @@ function App() {
                   <Route path="faq" element={<FAQ />} />
                   <Route path="calendar" element={<Calendar />} />
                 </Route>
-                <Route path="/signup" element={<SignUpPage />} />
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="*" element={'not found'} />
-                <Route path="/" element={<PrivateRoute requiredRole="sales" />}>
-                  <Route index element={<Home />} />
-                  <Route path="/setting" element={<Setting />} />
-                  <Route path="/allleads" element={<AllLeads />} />
-                  <Route path="/allleads/:clientId" element={<ClientDetails />} />
-                  <Route path="/add-lead" element={<AddClient />} />
+
+                <Route path="/sales" element={<PrivateRoute requiredRole="sales" />}>
+                  <Route index element={<AllLeads />} />
+                  <Route path="setting" element={<Setting />} />
+                  <Route path=":clientId" element={<ClientDetails />} />
+                  <Route path="add-lead" element={<AddClient />} />
+                </Route>
+
+                <Route path="/hr" element={<PrivateRoute requiredRole="hr" />}>
+                  <Route index element={<HrHome />} />
                 </Route>
               </Routes>
             </Stack>

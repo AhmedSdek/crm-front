@@ -6,149 +6,13 @@ import { useEffect, useState } from "react";
 import { BASE_URL } from "./constants/baseurl";
 import { useGetAllUsersQuery } from "../redux/apiSlice";
 
-// const BarChart = ({ isDashboard = false }) => {
-//   const theme = useTheme();
-//   const colors = tokens(theme.palette.mode);
-//   const [sales, setSales] = useState([]);
-//   const { data: users = [], isLoading: loadingUsers, error: errorUsers } = useGetAllUsersQuery();
-//   // تحديث الحالة عند تغيير البيانات
-//   useEffect(() => {
-//     if (users.length > 0) {
-//       const filteredUsers = users.filter(user => user.role === "sales");
-//       setSales(filteredUsers);
-//     }
-//   }, [users]); // يتم تشغيله عند تغيير users
-//   return (
-//     <div style={{ width: "100%", height: "400px" }}> {/* الحاوية */}
-//       <ResponsiveBar
-//         data={data}
-//         theme={{
-//           axis: {
-//             domain: {
-//               line: {
-//                 stroke: colors.grey[100],
-//               },
-//             },
-//             legend: {
-//               text: {
-//                 fill: colors.grey[100],
-//               },
-//             },
-//             ticks: {
-//               line: {
-//                 stroke: colors.grey[100],
-//                 strokeWidth: 1,
-//               },
-//               text: {
-//                 fill: colors.grey[100],
-//               },
-//             },
-//           },
-//           legends: {
-//             text: {
-//               fill: colors.grey[100],
-//             },
-//           },
-//         }}
-//         keys={["hot dog", "burger", "sandwich", "kebab", "fries", "donut"]}
-//         indexBy="country"
-//         margin={{ top: 50, right: 100, bottom: 50, left: 40 }}
-//         padding={0.3}
-//         valueScale={{ type: "linear" }}
-//         indexScale={{ type: "band", round: true }}
-//         colors={{ scheme: "nivo" }}
-//         defs={[
-//           {
-//             id: "dots",
-//             type: "patternDots",
-//             background: "inherit",
-//             color: "#38bcb2",
-//             size: 4,
-//             padding: 1,
-//             stagger: true,
-//           },
-//           {
-//             id: "lines",
-//             type: "patternLines",
-//             background: "inherit",
-//             color: "#eed312",
-//             rotation: -45,
-//             lineWidth: 6,
-//             spacing: 10,
-//           },
-//         ]}
-//         borderColor={{
-//           from: "color",
-//           modifiers: [["darker", "1.6"]],
-//         }}
-//         axisTop={null}
-//         axisRight={null}
-//         axisBottom={{
-//           tickSize: 5,
-//           tickPadding: 5,
-//           tickRotation: 0,
-//           legend: isDashboard ? undefined : "country",
-//           legendPosition: "middle",
-//           legendOffset: 32,
-//         }}
-//         axisLeft={{
-//           tickSize: 5,
-//           tickPadding: 5,
-//           tickRotation: 0,
-//           legend: isDashboard ? undefined : "food",
-//           legendPosition: "middle",
-//           legendOffset: -40,
-//         }}
-//         enableLabel={false}
-//         labelSkipWidth={12}
-//         labelSkipHeight={12}
-//         labelTextColor={{
-//           from: "color",
-//           modifiers: [["darker", 1.6]],
-//         }}
-//         legends={[
-//           {
-//             dataFrom: "keys",
-//             anchor: "bottom-right",
-//             direction: "column",
-//             justify: false,
-//             translateX: 120,
-//             translateY: 0,
-//             itemsSpacing: 2,
-//             itemWidth: 100,
-//             itemHeight: 20,
-//             itemDirection: "left-to-right",
-//             itemOpacity: 0.85,
-//             symbolSize: 20,
-//             effects: [
-//               {
-//                 on: "hover",
-//                 style: {
-//                   itemOpacity: 1,
-//                 },
-//               },
-//             ],
-//           },
-//         ]}
-//         role="application"
-//         barAriaLabel={function (e) {
-//           return e.id + ": " + e.formattedValue + " in country: " + e.indexValue;
-//         }}
-//       />
-//     </div>
-//   );
-// };
-
-// export default BarChart;
-
-
 const BarChart = ({ isDashboard = false }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [chartData, setChartData] = useState([]);
   const { data: users = [], isLoading: loadingUsers, error: errorUsers } = useGetAllUsersQuery();
   const [tickRotation, setTickRotation] = useState(0);
-
+  console.log("Chart Data:", chartData);
   useEffect(() => {
     const handleResize = () => {
       setTickRotation(window.innerWidth < 768 ? -30 : 0);
@@ -187,12 +51,14 @@ const BarChart = ({ isDashboard = false }) => {
         }, {});
 
         // إضافة أي حالة مفقودة بـ 0
+        // statusKeys.forEach(status => {
+        //   if (!(status in statusCounts)) {
+        //     statusCounts[status] = 0;
+        //   }
+        // });
         statusKeys.forEach(status => {
-          if (!(status in statusCounts)) {
-            statusCounts[status] = 0;
-          }
+          statusCounts[status] = Number(statusCounts[status]) || 0;  // تأكيد أن القيم عددية
         });
-
         return {
           salesName: salesPerson.name, // اسم السيلز للمحور X
           ...statusCounts,
@@ -291,14 +157,37 @@ const BarChart = ({ isDashboard = false }) => {
           legendPosition: "middle",
           legendOffset: window.innerWidth < 768 ? 50 : 40, // تعديل موضع التسمية
         }}
-        axisLeft={{
-          tickSize: 5,
-          tickPadding: 5,
-          tickRotation: 0,
-          legend: "Leads",
-          legendPosition: "middle",
-          legendOffset: -35,
-        }}
+          /*   axisLeft={{
+           tickSize: 5,
+           tickPadding: 5,
+           tickRotation: 0,
+            legend: "Leads",
+            legendPosition: "middle",
+            legendOffset: -35,
+          format: value => Math.floor(value), // عرض الأرقام كأعداد صحيحة
+         }}*/
+          axisLeft={{
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 0,
+            legend: "Leads",
+            legendPosition: "middle",
+            legendOffset: -35,
+            tickValues: Array.from({
+              length: Math.max(...chartData.map(item =>
+                Object.values(item).filter(v => typeof v === "number")).flat()) + 2
+            }, (_, i) => i),
+          }}
+          gridYValues={Array.from(
+            {
+              length: Math.max(5, Math.ceil(Math.max(...chartData.map(item => {
+                return Object.keys(item)
+                  .filter(key => key !== "salesName")
+                  .map(key => item[key]);
+              }).flat())) + 1)
+            },
+            (_, i) => i
+          )}
         enableLabel={false}
         labelSkipWidth={12}
         labelSkipHeight={12}
