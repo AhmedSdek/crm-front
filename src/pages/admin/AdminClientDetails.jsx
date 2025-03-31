@@ -210,6 +210,12 @@ function AdminClientDetails() {
                         onChange={handleInputChange}
                     />
                     <TextField
+                        label="Buyer or Seller"
+                        name="isBuyer"
+                        value={editedData.isBuyer || ''}
+                        onChange={handleInputChange}
+                    />
+                    <TextField
                         label="meeting Date & Time"
                         type="datetime-local"  // ✅ تغيير النوع ليشمل الوقت مع التاريخ
                         // label="meeting Date"

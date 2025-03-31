@@ -22,6 +22,7 @@ const Contacts = () => {
       refetchOnMountOrArgChange: true,
       refetchOnFocus: true,
     });
+  // console.log(clients)
 
   // 🟢 دالة حذف العميل مع اللودينج
   const handleDeleteClient = async (id) => {
@@ -56,11 +57,13 @@ const Contacts = () => {
     { field: "whatsapp", headerName: "Whatsapp Number", flex: 1, minWidth: 100 },
     { field: "email", headerName: "Email", flex: 1, minWidth: 150 },
     { field: "status", headerName: "Status", flex: 0.7, minWidth: 100 },
+    { field: "isBuyer", headerName: "Buyer or Seller", flex: 0.7, minWidth: 100 },
+
     {
       field: "assignedTo",
       headerName: "Assigned To",
       flex: 1,
-      minWidth: 200,
+      minWidth: 100,
       renderCell: ({ row }) => (
         <Box display="flex" justifyContent="center" alignItems="center" width="100%">
           {row.assignedTo?.name}
@@ -71,7 +74,7 @@ const Contacts = () => {
       field: 'action',
       headerName: "Action",
       flex: 1,
-      minWidth: 250,
+      minWidth: 200,
       renderCell: ({ row }) => (
         <Box
           sx={{

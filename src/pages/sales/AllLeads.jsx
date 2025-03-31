@@ -34,6 +34,7 @@ function AllLeads() {
         { field: "email", headerName: "Email", flex: 1, minWidth: 150 },
         { field: "status", headerName: "Status", flex: 0.7, minWidth: 100 },
         { field: "developer", headerName: "developer", flex: 0.7, minWidth: 100 },
+        { field: "isBuyer", headerName: "Buyer or Seller", flex: 0.7, minWidth: 100 },
         { field: "project", headerName: "project", flex: 0.7, minWidth: 100 },
         // { field: "modifiedTime", headerName: "modifiedTime", flex: 0.7, minWidth: 100 },
         {

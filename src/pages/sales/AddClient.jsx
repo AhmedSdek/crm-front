@@ -41,7 +41,7 @@ const AddClient = () => {
         description: '',
         whatsapp: '',
         meetingDate: '',
-        isBuyer: true, // True = شاري, False = بايع
+        isBuyer: '', // True = شاري, False = بايع
         assignedTo: '', // سيتم تعيين هذه القيمة بناءً على اختيار البائع
     });
 
@@ -62,7 +62,7 @@ const AddClient = () => {
                 description: '',
                 whatsapp: '',
                 meetingDate: '',
-                isBuyer: true,
+                isBuyer: '',
                 assignedTo: '', // إعادة تعيين assignedTo
             });
             alert('Client added successfully!');
@@ -165,8 +165,8 @@ const AddClient = () => {
                         value={newClient.isBuyer}
                         onChange={(e) => setNewClient({ ...newClient, isBuyer: e.target.value })}
                     >
-                        <MenuItem value={true}>Buyer</MenuItem>
-                        <MenuItem value={false}>Seller</MenuItem>
+                        <MenuItem value='Buyer'>Buyer</MenuItem>
+                        <MenuItem value='Seller'>Seller</MenuItem>
                     </Select>
                 </FormControl>
 
