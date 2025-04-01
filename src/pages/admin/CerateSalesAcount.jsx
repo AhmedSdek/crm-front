@@ -132,7 +132,7 @@ const CreateSalesUser = () => {
 
     return (
         <Container>
-            <Header title="Create Sales Account" subtitle="Add New Sales" />
+            <Header title="Create User Account" subtitle="Add New User" />
             <Stack spacing={2} component='form' onSubmit={handleCreateSales}>
                 <TextField
                     label="Name"
@@ -168,7 +168,7 @@ const CreateSalesUser = () => {
                     </Select>
                 </FormControl>
                 <Button type='submit' variant="contained" color="primary" disabled={loading}>
-                    {loading ? <CircularProgress size={20} color="inherit" /> : "Create Sales"}
+                    {loading ? <CircularProgress size={20} color="inherit" /> : "Create User"}
                 </Button>
             </Stack>
             {message && <Typography color="error">{message}</Typography>}

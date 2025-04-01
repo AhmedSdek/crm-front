@@ -459,6 +459,7 @@ const Clients = () => {
                     />
                     <TextField
                         label="Phone"
+                        type='number'
                         value={newClient.phone}
                         onChange={(e) => setNewClient({ ...newClient, phone: e.target.value })}
                         style={{ marginRight: '10px' }}
@@ -467,6 +468,7 @@ const Clients = () => {
                         label="Whatsapp"
                         value={newClient.whatsapp}
                         onChange={(e) => setNewClient({ ...newClient, whatsapp: e.target.value })}
+                        type='number'
                         style={{ marginRight: '10px' }}
                     />
                     <TextField

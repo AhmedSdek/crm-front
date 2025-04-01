@@ -201,7 +201,7 @@ const Sidebar = ({ isCollapsed, setIsCollapsed, left, setLeft }) => {
                             setIsCollapsed={setIsCollapsed}
                         />
                         <Item
-                            title="Create Sales"
+                            title="Create User"
                             to="admin-dashboard/create-sales"
                             icon={<PersonOutlinedIcon />}
                             selected={selected}

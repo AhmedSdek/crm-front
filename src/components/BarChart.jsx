@@ -12,7 +12,7 @@ const BarChart = ({ isDashboard = false }) => {
   const [chartData, setChartData] = useState([]);
   const { data: users = [], isLoading: loadingUsers, error: errorUsers } = useGetAllUsersQuery();
   const [tickRotation, setTickRotation] = useState(0);
-  console.log("Chart Data:", chartData);
+  // console.log("Chart Data:", chartData);
   useEffect(() => {
     const handleResize = () => {
       setTickRotation(window.innerWidth < 768 ? -30 : 0);
@@ -157,6 +157,10 @@ const BarChart = ({ isDashboard = false }) => {
             legendPosition: "middle",
             legendOffset: window.innerWidth < 768 ? 50 : 40, // تعديل موضع التسمية
           }}
+          gridYValues={Array.from(
+            { length: Math.ceil(Math.max(...chartData.map(d => Math.max(...Object.values(d).filter(v => typeof v === 'number'))))) + 2 },
+            (_, i) => i
+          )}
           axisLeft={{
             tickSize: 5,
             tickPadding: 5,
@@ -164,6 +168,7 @@ const BarChart = ({ isDashboard = false }) => {
             legend: "Leads",
             legendPosition: "middle",
             legendOffset: -35,
+            tickValues: Array.from({ length: Math.ceil(Math.max(...chartData.map(d => Math.max(...Object.values(d).filter(v => typeof v === 'number'))))) + 2 }, (_, i) => i),
           }}
           enableLabel={false}
           labelSkipWidth={12}
