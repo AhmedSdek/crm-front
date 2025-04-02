@@ -252,8 +252,8 @@ const Clients = () => {
     const [loading, setLoading] = useState(null);
     const [selectedSeller, setSelectedSeller] = useState('');
     const [newClient, setNewClient] = useState({
-        firstName: '',
-        lastName: '',
+        name: '',
+        // lastName: '',
         email: '',
         phone: '',
         developer: '',
@@ -390,8 +390,8 @@ const Clients = () => {
             })
             .then(() => {
                 setNewClient({
-                    firstName: '',
-                    lastName: '',
+                    name: '',
+                    // lastName: '',
                     email: '',
                     phone: '',
                     developer: '',
@@ -440,17 +440,17 @@ const Clients = () => {
                     handleCreateClient()
                 }} style={{ marginBottom: '20px', gap: 10 }}>
                     <TextField
-                        label="First Name"
-                        value={newClient.firstName}
-                        onChange={(e) => setNewClient({ ...newClient, firstName: e.target.value })}
+                        label="Name"
+                        value={newClient.name}
+                        onChange={(e) => setNewClient({ ...newClient, name: e.target.value })}
                         style={{ marginRight: '10px' }}
                     />
-                    <TextField
+                    {/* <TextField
                         label="Last Name"
                         value={newClient.lastName}
                         onChange={(e) => setNewClient({ ...newClient, lastName: e.target.value })}
                         style={{ marginRight: '10px' }}
-                    />
+                    /> */}
                     <TextField
                         label="Email"
                         value={newClient.email}

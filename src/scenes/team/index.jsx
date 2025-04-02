@@ -7,19 +7,46 @@ import SecurityOutlinedIcon from "@mui/icons-material/SecurityOutlined";
 import Header from "../../components/Header";
 import { useNavigate } from "react-router-dom";
 import { useGetAllUsersQuery } from "../../redux/apiSlice";
+import { useState } from "react";
+import Swal from "sweetalert2";
+import { BASE_URL } from "../../components/constants/baseurl";
 
 const Team = () => {
   // console.log(mockDataTeam)
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const { data: users = [], error: usersError, isLoading: usersLoading } =
+  const [loadingId, setLoadingId] = useState(null);
+  const { data: users = [], error: usersError, isLoading: usersLoading, refetch } =
     useGetAllUsersQuery(undefined, {
       refetchOnMountOrArgChange: true,
       refetchOnFocus: true,
     });
   // console.log(users)
   const nav = useNavigate()
-
+  const handleDelete = async (id) => {
+    // console.log(id)
+    setLoadingId(id); // تحديد العميل الجاري حذفه
+    try {
+      await fetch(`${BASE_URL}/api/users/${id}`, { method: "DELETE" });
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "User Deleted Success",
+        showConfirmButton: false,
+        timer: 900
+      });
+      await refetch(); // تحديث البيانات بعد الحذف
+    } catch (err) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Cant delete User",
+      });
+      console.error(err);
+    } finally {
+      setLoadingId(null); // إنهاء اللودينج بعد اكتمال العملية
+    }
+  };
   const columns = [
     // { field: "id", headerName: "ID" },
     {
@@ -27,26 +54,31 @@ const Team = () => {
       headerName: "Name",
       flex: 1,
       cellClassName: "name-column--cell",
+      minWidth: 100
     },
     {
       field: "phone",
       headerName: "Phone Number",
       flex: 1,
+      minWidth: 150
     },
     {
       field: "email",
       headerName: "Login Email",
       flex: 1,
+      minWidth: 200
     },
     {
       field: "realemail",
       headerName: "Email",
       flex: 1,
+      minWidth: 200
     },
     {
       field: "role",
       headerName: "Role",
       flex: 1,
+      minWidth: 100,
       renderCell: ({ row: { role } }) => {
         return (
           <Box
@@ -77,6 +109,7 @@ const Team = () => {
     {
       field: "assignedClients",
       headerName: "Clients",
+      minWidth: 100,
       flex: 0.5,
       renderCell: ({ row }) => {
         return (
@@ -90,6 +123,7 @@ const Team = () => {
       field: 'action',
       headerName: "Action",
       flex: 1,
+      minWidth: 200,
       renderCell: ({ row }) => {
         return (
           <Box sx={{ gap: 2 }} display="flex" justifyContent="space-around"
@@ -112,8 +146,9 @@ const Team = () => {
             >
               View
             </Button>
-            {/* <Button
+            <Button
               onClick={() => handleDelete(row._id)}
+              disabled={loadingId === row._id} // ⛔ تعطيل الزر أثناء التحميل
               sx={{
                 backgroundColor: colors.redAccent[600],
                 color: colors.grey[100],
@@ -121,10 +156,11 @@ const Team = () => {
                 borderRadius: "5px",
                 padding: "5px 10px",
                 cursor: "pointer",
+                display: row.role === "admin" && "none"
               }}
             >
-              Delete
-            </Button> */}
+              {loadingId === row._id ? <CircularProgress size={20} color="inherit" /> : "Delete"}
+            </Button>
           </Box >
         );
       },

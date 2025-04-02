@@ -99,11 +99,14 @@ function AdminClientDetails() {
                                 <LocalPhone />
                             </IconButton>
                         </a>
+                        {
+                            editedData.whatsapp && 
                         <a style={{ width: 'fit-content', borderRadius: '50%' }} href={`https://wa.me/${editedData.whatsapp}`}>
                             <IconButton>
                                 <WhatsApp />
                             </IconButton>
                         </a>
+                        }
                     </Stack>
                 </Stack>
                 <Divider sx={{ margin: '20px 0' }} />

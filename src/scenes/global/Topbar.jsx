@@ -311,12 +311,12 @@ const Topbar = ({ isCollapsed, setIsCollapsed, left, setLeft }) => {
                                     }}>
                                         log in
                                     </MenuItem>
-                                    <MenuItem onClick={() => {
+                                    {/* <MenuItem onClick={() => {
                                         handleCloseUserMenu();
                                         nav('/signup')
                                     }}>
                                         Sign up
-                                    </MenuItem>
+                                    </MenuItem> */}
                                 </>
                             )
                         }

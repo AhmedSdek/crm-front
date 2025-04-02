@@ -7,6 +7,7 @@ const SignUpPage = () => {
         name: '',
         email: '',
         password: '',
+        phone: '',
         role: 'admin', // Default role is 'sales'
     });
 
@@ -56,6 +57,15 @@ const SignUpPage = () => {
                     required
                     type='email'
                     name='email'
+                    onChange={handleChange}
+                    style={{ marginRight: '10px' }}
+                />
+                <TextField
+                    label="Phone"
+                    value={formData.phone}
+                    required
+                    type='number'
+                    name='phone'
                     onChange={handleChange}
                     style={{ marginRight: '10px' }}
                 />

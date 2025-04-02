@@ -51,8 +51,8 @@ const Contacts = () => {
   };
 
   const columns = [
-    { field: "firstName", headerName: "First Name", flex: 1, minWidth: 100 },
-    { field: "lastName", headerName: "Last Name", flex: 0.7, minWidth: 100 },
+    { field: "name", headerName: "Name", flex: 1, minWidth: 100 },
+    // { field: "lastName", headerName: "Last Name", flex: 0.7, minWidth: 100 },
     { field: "phone", headerName: "Phone Number", flex: 1, minWidth: 100 },
     { field: "whatsapp", headerName: "Whatsapp Number", flex: 1, minWidth: 100 },
     { field: "email", headerName: "Email", flex: 1, minWidth: 150 },
