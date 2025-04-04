@@ -132,6 +132,7 @@ const LoginPage = () => {
 
     return (
         <Container>
+            <Stack sx={{ height: 'calc(100vh - 68.56px)', justifyContent: 'center' }}>
             <Stack spacing={2} component='form' onSubmit={handleLogin}>
                 <Typography variant="h4">Login</Typography>
 
@@ -161,6 +162,7 @@ const LoginPage = () => {
                 <Button variant='contained' type="submit" disabled={isBlocked}>
                     {isBlocked ? 'Blocked' : 'Login'}
                 </Button>
+            </Stack>
             </Stack>
         </Container>
     );
