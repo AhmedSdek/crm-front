@@ -30,6 +30,7 @@ const Dashboard = () => {
       refetchOnMountOrArgChange: true, // تحديث البيانات عند تحميل المكون
       refetchOnFocus: true,            // تحديث البيانات عند التركيز على الصفحة
     });
+  // console.log(clients)
   const { data: newLeadsData, error: newLeadsError, isLoading: newLeadsLoading } =
     useGetNewLeadsQuery(undefined, {
       refetchOnMountOrArgChange: true,
@@ -453,6 +454,7 @@ const Dashboard = () => {
             </Box>
           </Stack>
           <Stack>
+            {clients && clients.length > 0 && 
             <Box
               height="400px"
               backgroundColor={colors.primary[400]}
@@ -467,6 +469,7 @@ const Dashboard = () => {
               </Typography>
               <PieChart />
             </Box>
+            }
           </Stack>
           {/* <Box
           gridColumn="span 4"
