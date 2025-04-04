@@ -32,7 +32,6 @@ import FAQ from './scenes/faq/index.jsx';
 import Calendar from './scenes/calendar/calendar.jsx';
 import { jwtDecode } from 'jwt-decode';
 import socket from './components/constants/soket.jsx';
-import GeographyChart from './components/GeographyChart.jsx'
 import HrHome from './pages/sales/HrHome.jsx'
 function App() {
   const [theme, colorMode] = useMode();
