@@ -9,6 +9,9 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
+      workbox: {
+        maximumFileSizeToCacheInBytes: 5000000 // 5MB بدل 2MB
+      },
       manifest: {
         name: 'Real Estate CRM',
         short_name: 'CRM',
