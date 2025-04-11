@@ -115,15 +115,9 @@ function AdminClientDetails() {
                     handleUpdate()
                 }} spacing={2}>
                     <TextField
-                        label="First Name"
-                        name="firstName"
-                        value={editedData.firstName || ''}
-                        onChange={handleInputChange}
-                    />
-                    <TextField
-                        label="Last Name"
-                        name="lastName"
-                        value={editedData.lastName || ''}
+                        label="Name"
+                        name="name"
+                        value={editedData.name || ''}
                         onChange={handleInputChange}
                     />
                     <TextField
@@ -212,13 +206,24 @@ function AdminClientDetails() {
                         value={editedData.description || ''}
                         onChange={handleInputChange}
                     />
-                    <TextField
+                    {/* <TextField
                         label="Buyer or Seller"
                         name="isBuyer"
                         value={editedData.isBuyer || ''}
                         onChange={handleInputChange}
-                    />
-                    <TextField
+                    /> */}
+                    <FormControl style={{ marginRight: '10px' }}>
+                        <InputLabel>Buyer or Seller</InputLabel>
+                        <Select
+                            value={editedData.isBuyer || ''}
+                            name="isBuyer"
+                            onChange={handleInputChange}
+                        >
+                            <MenuItem value='Buyer'>Buyer</MenuItem>
+                            <MenuItem value='Seller'>Seller</MenuItem>
+                        </Select>
+                    </FormControl>
+                    {/* <TextField
                         label="meeting Date & Time"
                         type="datetime-local"  // ✅ تغيير النوع ليشمل الوقت مع التاريخ
                         // label="meeting Date"
@@ -227,7 +232,7 @@ function AdminClientDetails() {
                         value={editedData.meetingDate || ''}
                         onChange={handleInputChange}
                         InputLabelProps={{ shrink: true }} // ✅ يضمن بقاء الـ label في الأعلى
-                    />
+                    /> */}
                     <FormControl style={{ marginRight: '10px' }}>
                         <InputLabel>Assign To</InputLabel>
                         <Select
